@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+                        <x-application-logo class="block h-9 w-auto" />
                     </a>
                 </div>
 
@@ -15,6 +15,28 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('activity.logs')" :active="request()->routeIs('activity.logs')">
+                        {{ __('Activity Logs') }}
+                    </x-nav-link>
+
+                    @if(auth()->user()->role === 'admin')
+                        <!-- Admin Menu -->
+                        <x-nav-link :href="route('assets.index')" :active="request()->routeIs('assets.*')">
+                            {{ __('All Assets') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('assets.vehicles')" :active="request()->routeIs('assets.vehicles')">
+                            {{ __('Vehicles') }}
+                        </x-nav-link>
+                        {{-- Splicers removed --}}
+                        <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
+                            {{ __('Manage PIC') }}
+                        </x-nav-link>
+                    @else
+                        <!-- User/PIC Menu (Simplified) -->
+                        <x-nav-link :href="route('assets.index')" :active="request()->routeIs('assets.*')">
+                            {{ __('My Assets') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -23,7 +45,9 @@
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                            <div>{{ Auth::user()->name }}</div>
+                            <div>{{ Auth::user()->name }}
+                                <span class="text-xs text-gray-400">({{ Auth::user()->role === 'admin' ? 'Admin' : 'PIC' }})</span>
+                            </div>
 
                             <div class="ms-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -70,6 +94,28 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+
+            @if(auth()->user()->role === 'admin')
+                <!-- Admin Mobile Menu -->
+                <x-responsive-nav-link :href="route('assets.index')" :active="request()->routeIs('assets.*')">
+                    {{ __('All Assets') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('activity.logs')" :active="request()->routeIs('activity.logs')">
+                    {{ __('Activity Logs') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('assets.vehicles')" :active="request()->routeIs('assets.vehicles')">
+                    {{ __('Vehicles') }}
+                </x-responsive-nav-link>
+                {{-- Splicers link removed --}}
+                <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
+                    {{ __('Manage PIC') }}
+                </x-responsive-nav-link>
+            @else
+                <!-- User/PIC Mobile Menu -->
+                <x-responsive-nav-link :href="route('assets.index')" :active="request()->routeIs('assets.*')">
+                    {{ __('My Assets') }}
+                </x-responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->

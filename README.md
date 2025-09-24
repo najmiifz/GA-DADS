@@ -48,6 +48,38 @@ We would like to extend our thanks to the following sponsors for funding Laravel
 
 Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
+---
+## Deployment to Hostinger
+
+This project includes a deploy script to prepare the application for Hostinger shared hosting.
+
+1. Place the project root in a subfolder of your public_html, for example: `/public_html/ga`.
+2. Ensure the web root points to the `public` directory of this project.
+3. Copy `.env.example` to `.env`, then adjust:
+	```env
+	APP_ENV=production
+	APP_DEBUG=false
+	APP_URL=https://your-domain.com/ga
+	DB_CONNECTION=mysql
+	DB_HOST=localhost
+	DB_DATABASE=your_db_name
+	DB_USERNAME=your_db_user
+	DB_PASSWORD=your_db_pass
+	PUBLIC_STORAGE_PATH=/home/username/public_html/ga/storage
+	FILESYSTEM_DISK=public
+	```
+4. From SSH or Hostinger's terminal, run the deploy script:
+	```bash
+	bash scripts/deploy.sh
+	```
+	This installs dependencies, builds assets, links storage, caches config/routes/views, and sets permissions.
+5. (Optional) Configure a cron job for scheduler:
+	```cron
+	* * * * * php /home/username/public_html/ga/artisan schedule:run >> /dev/null 2>&1
+	```
+
+Now the application is optimized and ready to run under Hostinger shared hosting.
+
 ## Code of Conduct
 
 In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).

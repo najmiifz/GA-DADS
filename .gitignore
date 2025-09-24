@@ -1,3 +1,5 @@
+# Deployment scripts
+scripts/deploy.sh
 *.log
 .DS_Store
 .env

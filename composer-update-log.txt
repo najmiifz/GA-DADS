@@ -1,0 +1,592 @@
+Running 2.8.8 (2025-04-04 16:56:46) with PHP 8.2.12 on Windows NT / 10.0
+Reading ./composer.json (C:\Users\Acer\dadsaset-ga\composer.json)
+Loading config file ./composer.json (C:\Users\Acer\dadsaset-ga\composer.json)
+Checked CA file C:\xampp\apache\bin\curl-ca-bundle.crt: valid
+Executing command (C:\Users\Acer\dadsaset-ga): git branch -a --no-color --no-abbrev -v
+Failed to initialize global composer: Composer could not find the config file: C:/Users/Acer/AppData/Roaming/Composer/composer.json
+
+Reading C:\Users\Acer\dadsaset-ga/vendor/composer/installed.json (C:\Users\Acer\dadsaset-ga\vendor\composer\installed.json)
+Loading plugin Pest\Plugin\Manager (from pestphp/pest-plugin)
+[32m./composer.json has been updated[39m
+Unloading plugin Pest\Plugin\Manager
+Reading ./composer.json (C:\Users\Acer\dadsaset-ga\composer.json)
+Loading config file ./composer.json (C:\Users\Acer\dadsaset-ga\composer.json)
+Executing command (C:\Users\Acer\dadsaset-ga): git branch -a --no-color --no-abbrev -v
+Failed to initialize global composer: Composer could not find the config file: C:/Users/Acer/AppData/Roaming/Composer/composer.json
+
+Reading C:\Users\Acer\dadsaset-ga/vendor/composer/installed.json (C:\Users\Acer\dadsaset-ga\vendor\composer\installed.json)
+Loading plugin Pest\Plugin\Manager_composer_tmp0 (from pestphp/pest-plugin)
+[32mRunning composer update maatwebsite/excel --with-all-dependencies[39m
+Reading ./composer.lock (C:\Users\Acer\dadsaset-ga\composer.lock)
+[32mLoading composer repositories with package information[39m
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/packages.json from cache
+Downloading https://repo.packagist.org/packages.json if modified
+[304] https://repo.packagist.org/packages.json
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-maatwebsite~excel.json from cache
+Downloading https://repo.packagist.org/p2/maatwebsite/excel.json if modified
+[304] https://repo.packagist.org/p2/maatwebsite/excel.json
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-phpoffice~phpspreadsheet.json from cache
+Downloading https://repo.packagist.org/p2/phpoffice/phpspreadsheet.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-illuminate~console.json from cache
+Downloading https://repo.packagist.org/p2/illuminate/console.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-illuminate~contracts.json from cache
+Downloading https://repo.packagist.org/p2/illuminate/contracts.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-illuminate~support.json from cache
+Downloading https://repo.packagist.org/p2/illuminate/support.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-illuminate~filesystem.json from cache
+Downloading https://repo.packagist.org/p2/illuminate/filesystem.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-illuminate~validation.json from cache
+Downloading https://repo.packagist.org/p2/illuminate/validation.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-illuminate~log.json from cache
+Downloading https://repo.packagist.org/p2/illuminate/log.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-illuminate~process.json from cache
+Downloading https://repo.packagist.org/p2/illuminate/process.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-laravel~framework.json from cache
+Downloading https://repo.packagist.org/p2/laravel/framework.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-psr~simple-cache.json from cache
+Downloading https://repo.packagist.org/p2/psr/simple-cache.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-composer~semver.json from cache
+Downloading https://repo.packagist.org/p2/composer/semver.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-opis~closure.json from cache
+Downloading https://repo.packagist.org/p2/opis/closure.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-orchestra~testbench.json from cache
+[304] https://repo.packagist.org/p2/phpoffice/phpspreadsheet.json
+Downloading https://repo.packagist.org/p2/orchestra/testbench.json if modified
+[304] https://repo.packagist.org/p2/illuminate/console.json
+[304] https://repo.packagist.org/p2/illuminate/contracts.json
+[304] https://repo.packagist.org/p2/illuminate/support.json
+[304] https://repo.packagist.org/p2/illuminate/filesystem.json
+[304] https://repo.packagist.org/p2/illuminate/validation.json
+[304] https://repo.packagist.org/p2/illuminate/log.json
+[304] https://repo.packagist.org/p2/illuminate/process.json
+[304] https://repo.packagist.org/p2/laravel/framework.json
+[304] https://repo.packagist.org/p2/psr/simple-cache.json
+[304] https://repo.packagist.org/p2/composer/semver.json
+[304] https://repo.packagist.org/p2/opis/closure.json
+[304] https://repo.packagist.org/p2/orchestra/testbench.json
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-composer~pcre.json from cache
+Downloading https://repo.packagist.org/p2/composer/pcre.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-ezyang~htmlpurifier.json from cache
+Downloading https://repo.packagist.org/p2/ezyang/htmlpurifier.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-maennchen~zipstream-php.json from cache
+Downloading https://repo.packagist.org/p2/maennchen/zipstream-php.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-markbaker~complex.json from cache
+Downloading https://repo.packagist.org/p2/markbaker/complex.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-markbaker~matrix.json from cache
+Downloading https://repo.packagist.org/p2/markbaker/matrix.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-psr~http-client.json from cache
+Downloading https://repo.packagist.org/p2/psr/http-client.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-psr~http-factory.json from cache
+Downloading https://repo.packagist.org/p2/psr/http-factory.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-guzzlehttp~guzzle.json from cache
+Downloading https://repo.packagist.org/p2/guzzlehttp/guzzle.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-illuminate~collections.json from cache
+Downloading https://repo.packagist.org/p2/illuminate/collections.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-illuminate~contracts.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-illuminate~macroable.json from cache
+Downloading https://repo.packagist.org/p2/illuminate/macroable.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-illuminate~view.json from cache
+Downloading https://repo.packagist.org/p2/illuminate/view.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-laravel~prompts.json from cache
+Downloading https://repo.packagist.org/p2/laravel/prompts.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-nunomaduro~termwind.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-symfony~console.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-symfony~polyfill-php83.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-symfony~process.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-psr~container.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-doctrine~inflector.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-illuminate~conditionable.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-nesbot~carbon.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-voku~portable-ascii.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-symfony~finder.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-brick~math.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-egulias~email-validator.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-illuminate~container.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-illuminate~translation.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-symfony~http-foundation.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-symfony~mime.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-monolog~monolog.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-psr~log.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-dragonmantank~cron-expression.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-fruitcake~php-cors.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-guzzlehttp~uri-template.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-laravel~serializable-closure.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-league~commonmark.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-league~flysystem.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-league~flysystem-local.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-league~uri.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-ramsey~uuid.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-symfony~error-handler.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-symfony~http-kernel.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-symfony~mailer.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-symfony~polyfill-php84.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-symfony~polyfill-php85.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-symfony~routing.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-symfony~uid.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-symfony~var-dumper.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-tijsverkoyen~css-to-inline-styles.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-vlucas~phpdotenv.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-mockery~mockery.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-orchestra~testbench-core.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-phpunit~phpunit.json from cache
+[304] https://repo.packagist.org/p2/ezyang/htmlpurifier.json
+Downloading https://repo.packagist.org/p2/nunomaduro/termwind.json if modified
+[304] https://repo.packagist.org/p2/composer/pcre.json
+[304] https://repo.packagist.org/p2/maennchen/zipstream-php.json
+[304] https://repo.packagist.org/p2/markbaker/complex.json
+[304] https://repo.packagist.org/p2/markbaker/matrix.json
+[304] https://repo.packagist.org/p2/psr/http-client.json
+[304] https://repo.packagist.org/p2/psr/http-factory.json
+[304] https://repo.packagist.org/p2/guzzlehttp/guzzle.json
+[304] https://repo.packagist.org/p2/illuminate/collections.json
+[304] https://repo.packagist.org/p2/illuminate/macroable.json
+Downloading https://repo.packagist.org/p2/symfony/console.json if modified
+Downloading https://repo.packagist.org/p2/symfony/polyfill-php83.json if modified
+Downloading https://repo.packagist.org/p2/symfony/process.json if modified
+Downloading https://repo.packagist.org/p2/psr/container.json if modified
+Downloading https://repo.packagist.org/p2/doctrine/inflector.json if modified
+Downloading https://repo.packagist.org/p2/illuminate/conditionable.json if modified
+Downloading https://repo.packagist.org/p2/nesbot/carbon.json if modified
+Downloading https://repo.packagist.org/p2/voku/portable-ascii.json if modified
+Downloading https://repo.packagist.org/p2/symfony/finder.json if modified
+[304] https://repo.packagist.org/p2/illuminate/view.json
+[304] https://repo.packagist.org/p2/laravel/prompts.json
+Downloading https://repo.packagist.org/p2/brick/math.json if modified
+Downloading https://repo.packagist.org/p2/egulias/email-validator.json if modified
+[304] https://repo.packagist.org/p2/nunomaduro/termwind.json
+Downloading https://repo.packagist.org/p2/illuminate/container.json if modified
+[304] https://repo.packagist.org/p2/symfony/console.json
+[304] https://repo.packagist.org/p2/symfony/polyfill-php83.json
+[304] https://repo.packagist.org/p2/symfony/process.json
+[304] https://repo.packagist.org/p2/psr/container.json
+[304] https://repo.packagist.org/p2/illuminate/conditionable.json
+[304] https://repo.packagist.org/p2/nesbot/carbon.json
+Downloading https://repo.packagist.org/p2/illuminate/translation.json if modified
+Downloading https://repo.packagist.org/p2/symfony/http-foundation.json if modified
+Downloading https://repo.packagist.org/p2/symfony/mime.json if modified
+Downloading https://repo.packagist.org/p2/monolog/monolog.json if modified
+Downloading https://repo.packagist.org/p2/psr/log.json if modified
+Downloading https://repo.packagist.org/p2/dragonmantank/cron-expression.json if modified
+[304] https://repo.packagist.org/p2/doctrine/inflector.json
+[304] https://repo.packagist.org/p2/voku/portable-ascii.json
+[304] https://repo.packagist.org/p2/symfony/finder.json
+Downloading https://repo.packagist.org/p2/fruitcake/php-cors.json if modified
+Downloading https://repo.packagist.org/p2/guzzlehttp/uri-template.json if modified
+Downloading https://repo.packagist.org/p2/laravel/serializable-closure.json if modified
+[304] https://repo.packagist.org/p2/brick/math.json
+[304] https://repo.packagist.org/p2/egulias/email-validator.json
+[304] https://repo.packagist.org/p2/illuminate/container.json
+Downloading https://repo.packagist.org/p2/league/commonmark.json if modified
+Downloading https://repo.packagist.org/p2/league/flysystem.json if modified
+Downloading https://repo.packagist.org/p2/league/flysystem-local.json if modified
+[304] https://repo.packagist.org/p2/illuminate/translation.json
+[304] https://repo.packagist.org/p2/symfony/http-foundation.json
+[304] https://repo.packagist.org/p2/symfony/mime.json
+[304] https://repo.packagist.org/p2/monolog/monolog.json
+[304] https://repo.packagist.org/p2/psr/log.json
+[304] https://repo.packagist.org/p2/dragonmantank/cron-expression.json
+Downloading https://repo.packagist.org/p2/league/uri.json if modified
+Downloading https://repo.packagist.org/p2/ramsey/uuid.json if modified
+Downloading https://repo.packagist.org/p2/symfony/error-handler.json if modified
+Downloading https://repo.packagist.org/p2/symfony/http-kernel.json if modified
+Downloading https://repo.packagist.org/p2/symfony/mailer.json if modified
+Downloading https://repo.packagist.org/p2/symfony/polyfill-php84.json if modified
+[304] https://repo.packagist.org/p2/fruitcake/php-cors.json
+[304] https://repo.packagist.org/p2/guzzlehttp/uri-template.json
+[304] https://repo.packagist.org/p2/laravel/serializable-closure.json
+Downloading https://repo.packagist.org/p2/symfony/polyfill-php85.json if modified
+Downloading https://repo.packagist.org/p2/symfony/routing.json if modified
+Downloading https://repo.packagist.org/p2/symfony/uid.json if modified
+[304] https://repo.packagist.org/p2/league/commonmark.json
+[304] https://repo.packagist.org/p2/league/flysystem.json
+[304] https://repo.packagist.org/p2/league/flysystem-local.json
+Downloading https://repo.packagist.org/p2/symfony/var-dumper.json if modified
+Downloading https://repo.packagist.org/p2/tijsverkoyen/css-to-inline-styles.json if modified
+Downloading https://repo.packagist.org/p2/vlucas/phpdotenv.json if modified
+[304] https://repo.packagist.org/p2/league/uri.json
+[304] https://repo.packagist.org/p2/ramsey/uuid.json
+[304] https://repo.packagist.org/p2/symfony/error-handler.json
+[304] https://repo.packagist.org/p2/symfony/http-kernel.json
+[304] https://repo.packagist.org/p2/symfony/mailer.json
+[304] https://repo.packagist.org/p2/symfony/polyfill-php84.json
+Downloading https://repo.packagist.org/p2/mockery/mockery.json if modified
+Downloading https://repo.packagist.org/p2/orchestra/testbench-core.json if modified
+Downloading https://repo.packagist.org/p2/phpunit/phpunit.json if modified
+[304] https://repo.packagist.org/p2/symfony/polyfill-php85.json
+[304] https://repo.packagist.org/p2/symfony/routing.json
+[304] https://repo.packagist.org/p2/symfony/uid.json
+[304] https://repo.packagist.org/p2/symfony/var-dumper.json
+[304] https://repo.packagist.org/p2/tijsverkoyen/css-to-inline-styles.json
+[304] https://repo.packagist.org/p2/vlucas/phpdotenv.json
+[304] https://repo.packagist.org/p2/mockery/mockery.json
+[304] https://repo.packagist.org/p2/orchestra/testbench-core.json
+[304] https://repo.packagist.org/p2/phpunit/phpunit.json
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-psr~http-message.json from cache
+Downloading https://repo.packagist.org/p2/psr/http-message.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-myclabs~php-enum.json from cache
+Downloading https://repo.packagist.org/p2/myclabs/php-enum.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-symfony~polyfill-mbstring.json from cache
+Downloading https://repo.packagist.org/p2/symfony/polyfill-mbstring.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-guzzlehttp~promises.json from cache
+Downloading https://repo.packagist.org/p2/guzzlehttp/promises.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-guzzlehttp~psr7.json from cache
+Downloading https://repo.packagist.org/p2/guzzlehttp/psr7.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-symfony~deprecation-contracts.json from cache
+Downloading https://repo.packagist.org/p2/symfony/deprecation-contracts.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-illuminate~events.json from cache
+Downloading https://repo.packagist.org/p2/illuminate/events.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-illuminate~filesystem.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-symfony~service-contracts.json from cache
+Downloading https://repo.packagist.org/p2/symfony/service-contracts.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-symfony~string.json from cache
+Downloading https://repo.packagist.org/p2/symfony/string.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-symfony~polyfill-php73.json from cache
+Downloading https://repo.packagist.org/p2/symfony/polyfill-php73.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-symfony~polyfill-php80.json from cache
+Downloading https://repo.packagist.org/p2/symfony/polyfill-php80.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-symfony~contracts.json from cache
+Downloading https://repo.packagist.org/p2/symfony/contracts.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-symfony~debug.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-carbonphp~carbon-doctrine-types.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-psr~clock.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-symfony~clock.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-symfony~translation.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-kylekatarnls~update-helper.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-doctrine~lexer.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-symfony~polyfill-intl-idn.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-symfony~mime.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-webmozart~assert.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-league~config.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-psr~event-dispatcher.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-league~flysystem-local.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-league~mime-type-detection.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-league~uri-interfaces.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-ramsey~collection.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-symfony~event-dispatcher.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-symfony~polyfill-ctype.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-symfony~polyfill-uuid.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-symfony~polyfill-php72.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-symfony~css-selector.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-graham-campbell~result-type.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-phpoption~phpoption.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-hamcrest~hamcrest-php.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-fzaninotto~faker.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-myclabs~deep-copy.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-phar-io~manifest.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-phar-io~version.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-phpunit~php-code-coverage.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-phpunit~php-file-iterator.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-phpunit~php-invoker.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-phpunit~php-text-template.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-phpunit~php-timer.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-sebastian~cli-parser.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-sebastian~comparator.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-sebastian~diff.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-sebastian~environment.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-sebastian~exporter.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-sebastian~global-state.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-sebastian~object-enumerator.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-sebastian~type.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-sebastian~version.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-staabm~side-effects-detector.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-sebastian~code-unit.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-sebastian~recursion-context.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-doctrine~instantiator.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-sebastian~resource-operations.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-phpspec~prophecy.json from cache
+[304] https://repo.packagist.org/p2/psr/http-message.json
+[304] https://repo.packagist.org/p2/myclabs/php-enum.json
+[304] https://repo.packagist.org/p2/symfony/polyfill-mbstring.json
+Downloading https://repo.packagist.org/p2/symfony/debug.json if modified
+Downloading https://repo.packagist.org/p2/carbonphp/carbon-doctrine-types.json if modified
+Downloading https://repo.packagist.org/p2/psr/clock.json if modified
+[304] https://repo.packagist.org/p2/guzzlehttp/promises.json
+[304] https://repo.packagist.org/p2/guzzlehttp/psr7.json
+[304] https://repo.packagist.org/p2/symfony/deprecation-contracts.json
+[304] https://repo.packagist.org/p2/illuminate/events.json
+[304] https://repo.packagist.org/p2/symfony/service-contracts.json
+[304] https://repo.packagist.org/p2/symfony/string.json
+[304] https://repo.packagist.org/p2/symfony/polyfill-php73.json
+[304] https://repo.packagist.org/p2/symfony/polyfill-php80.json
+[304] https://repo.packagist.org/p2/symfony/contracts.json
+Downloading https://repo.packagist.org/p2/symfony/clock.json if modified
+Downloading https://repo.packagist.org/p2/symfony/translation.json if modified
+Downloading https://repo.packagist.org/p2/kylekatarnls/update-helper.json if modified
+Downloading https://repo.packagist.org/p2/doctrine/lexer.json if modified
+Downloading https://repo.packagist.org/p2/symfony/polyfill-intl-idn.json if modified
+Downloading https://repo.packagist.org/p2/webmozart/assert.json if modified
+Downloading https://repo.packagist.org/p2/league/config.json if modified
+Downloading https://repo.packagist.org/p2/psr/event-dispatcher.json if modified
+Downloading https://repo.packagist.org/p2/league/mime-type-detection.json if modified
+[304] https://repo.packagist.org/p2/symfony/debug.json
+Downloading https://repo.packagist.org/p2/league/uri-interfaces.json if modified
+[304] https://repo.packagist.org/p2/carbonphp/carbon-doctrine-types.json
+[304] https://repo.packagist.org/p2/psr/clock.json
+Downloading https://repo.packagist.org/p2/ramsey/collection.json if modified
+Downloading https://repo.packagist.org/p2/symfony/event-dispatcher.json if modified
+[304] https://repo.packagist.org/p2/symfony/clock.json
+[304] https://repo.packagist.org/p2/symfony/translation.json
+[304] https://repo.packagist.org/p2/kylekatarnls/update-helper.json
+[304] https://repo.packagist.org/p2/doctrine/lexer.json
+[304] https://repo.packagist.org/p2/symfony/polyfill-intl-idn.json
+[304] https://repo.packagist.org/p2/webmozart/assert.json
+[304] https://repo.packagist.org/p2/league/config.json
+[304] https://repo.packagist.org/p2/psr/event-dispatcher.json
+[304] https://repo.packagist.org/p2/league/mime-type-detection.json
+Downloading https://repo.packagist.org/p2/symfony/polyfill-ctype.json if modified
+Downloading https://repo.packagist.org/p2/symfony/polyfill-uuid.json if modified
+Downloading https://repo.packagist.org/p2/symfony/polyfill-php72.json if modified
+Downloading https://repo.packagist.org/p2/symfony/css-selector.json if modified
+Downloading https://repo.packagist.org/p2/graham-campbell/result-type.json if modified
+Downloading https://repo.packagist.org/p2/phpoption/phpoption.json if modified
+Downloading https://repo.packagist.org/p2/hamcrest/hamcrest-php.json if modified
+Downloading https://repo.packagist.org/p2/fzaninotto/faker.json if modified
+Downloading https://repo.packagist.org/p2/myclabs/deep-copy.json if modified
+[304] https://repo.packagist.org/p2/league/uri-interfaces.json
+Downloading https://repo.packagist.org/p2/phar-io/manifest.json if modified
+[304] https://repo.packagist.org/p2/ramsey/collection.json
+[304] https://repo.packagist.org/p2/symfony/event-dispatcher.json
+Downloading https://repo.packagist.org/p2/phar-io/version.json if modified
+Downloading https://repo.packagist.org/p2/phpunit/php-code-coverage.json if modified
+[304] https://repo.packagist.org/p2/symfony/polyfill-ctype.json
+[304] https://repo.packagist.org/p2/symfony/polyfill-uuid.json
+[304] https://repo.packagist.org/p2/symfony/polyfill-php72.json
+[304] https://repo.packagist.org/p2/symfony/css-selector.json
+[304] https://repo.packagist.org/p2/graham-campbell/result-type.json
+[304] https://repo.packagist.org/p2/phpoption/phpoption.json
+[304] https://repo.packagist.org/p2/hamcrest/hamcrest-php.json
+[304] https://repo.packagist.org/p2/fzaninotto/faker.json
+[304] https://repo.packagist.org/p2/myclabs/deep-copy.json
+Downloading https://repo.packagist.org/p2/phpunit/php-file-iterator.json if modified
+Downloading https://repo.packagist.org/p2/phpunit/php-invoker.json if modified
+Downloading https://repo.packagist.org/p2/phpunit/php-text-template.json if modified
+Downloading https://repo.packagist.org/p2/phpunit/php-timer.json if modified
+Downloading https://repo.packagist.org/p2/sebastian/cli-parser.json if modified
+Downloading https://repo.packagist.org/p2/sebastian/comparator.json if modified
+Downloading https://repo.packagist.org/p2/sebastian/diff.json if modified
+Downloading https://repo.packagist.org/p2/sebastian/environment.json if modified
+Downloading https://repo.packagist.org/p2/sebastian/exporter.json if modified
+[304] https://repo.packagist.org/p2/phar-io/manifest.json
+Downloading https://repo.packagist.org/p2/sebastian/global-state.json if modified
+[304] https://repo.packagist.org/p2/phar-io/version.json
+[304] https://repo.packagist.org/p2/phpunit/php-code-coverage.json
+Downloading https://repo.packagist.org/p2/sebastian/object-enumerator.json if modified
+Downloading https://repo.packagist.org/p2/sebastian/type.json if modified
+[304] https://repo.packagist.org/p2/phpunit/php-file-iterator.json
+[304] https://repo.packagist.org/p2/phpunit/php-invoker.json
+[304] https://repo.packagist.org/p2/phpunit/php-text-template.json
+[304] https://repo.packagist.org/p2/phpunit/php-timer.json
+[304] https://repo.packagist.org/p2/sebastian/cli-parser.json
+[304] https://repo.packagist.org/p2/sebastian/comparator.json
+[304] https://repo.packagist.org/p2/sebastian/diff.json
+Downloading https://repo.packagist.org/p2/sebastian/version.json if modified
+Downloading https://repo.packagist.org/p2/staabm/side-effects-detector.json if modified
+Downloading https://repo.packagist.org/p2/sebastian/code-unit.json if modified
+Downloading https://repo.packagist.org/p2/sebastian/recursion-context.json if modified
+Downloading https://repo.packagist.org/p2/doctrine/instantiator.json if modified
+Downloading https://repo.packagist.org/p2/sebastian/resource-operations.json if modified
+Downloading https://repo.packagist.org/p2/phpspec/prophecy.json if modified
+[304] https://repo.packagist.org/p2/sebastian/environment.json
+[304] https://repo.packagist.org/p2/sebastian/exporter.json
+[304] https://repo.packagist.org/p2/sebastian/global-state.json
+[304] https://repo.packagist.org/p2/sebastian/object-enumerator.json
+[304] https://repo.packagist.org/p2/sebastian/type.json
+[304] https://repo.packagist.org/p2/sebastian/version.json
+[304] https://repo.packagist.org/p2/staabm/side-effects-detector.json
+[304] https://repo.packagist.org/p2/sebastian/code-unit.json
+[304] https://repo.packagist.org/p2/sebastian/recursion-context.json
+[304] https://repo.packagist.org/p2/doctrine/instantiator.json
+[304] https://repo.packagist.org/p2/sebastian/resource-operations.json
+[304] https://repo.packagist.org/p2/phpspec/prophecy.json
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-vimeo~psalm.json from cache
+Downloading https://repo.packagist.org/p2/vimeo/psalm.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-ralouphie~getallheaders.json from cache
+Downloading https://repo.packagist.org/p2/ralouphie/getallheaders.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-illuminate~bus.json from cache
+Downloading https://repo.packagist.org/p2/illuminate/bus.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-symfony~polyfill-intl-grapheme.json from cache
+Downloading https://repo.packagist.org/p2/symfony/polyfill-intl-grapheme.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-symfony~polyfill-intl-normalizer.json from cache
+Downloading https://repo.packagist.org/p2/symfony/polyfill-intl-normalizer.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-psr~cache.json from cache
+Downloading https://repo.packagist.org/p2/psr/cache.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-symfony~translation-contracts.json from cache
+Downloading https://repo.packagist.org/p2/symfony/translation-contracts.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-doctrine~deprecations.json from cache
+Downloading https://repo.packagist.org/p2/doctrine/deprecations.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-symfony~polyfill-php70.json from cache
+Downloading https://repo.packagist.org/p2/symfony/polyfill-php70.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-dflydev~dot-access-data.json from cache
+Downloading https://repo.packagist.org/p2/dflydev/dot-access-data.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-nette~schema.json from cache
+Downloading https://repo.packagist.org/p2/nette/schema.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-symfony~polyfill-php81.json from cache
+Downloading https://repo.packagist.org/p2/symfony/polyfill-php81.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-symfony~event-dispatcher-contracts.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-paragonie~random_compat.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-phar-io~version.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-nikic~php-parser.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-sebastian~complexity.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-sebastian~lines-of-code.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-theseer~tokenizer.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-sebastian~code-unit-reverse-lookup.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-phpunit~php-token-stream.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-sebastian~exporter.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-sebastian~recursion-context.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-sebastian~object-reflector.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-phpdocumentor~reflection-docblock.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-sebastian~comparator.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-doctrine~instantiator.json from cache
+[304] https://repo.packagist.org/p2/vimeo/psalm.json
+Downloading https://repo.packagist.org/p2/symfony/event-dispatcher-contracts.json if modified
+[304] https://repo.packagist.org/p2/ralouphie/getallheaders.json
+[304] https://repo.packagist.org/p2/illuminate/bus.json
+[304] https://repo.packagist.org/p2/symfony/polyfill-intl-grapheme.json
+[304] https://repo.packagist.org/p2/symfony/polyfill-intl-normalizer.json
+[304] https://repo.packagist.org/p2/psr/cache.json
+[304] https://repo.packagist.org/p2/symfony/translation-contracts.json
+[304] https://repo.packagist.org/p2/doctrine/deprecations.json
+[304] https://repo.packagist.org/p2/symfony/polyfill-php70.json
+[304] https://repo.packagist.org/p2/dflydev/dot-access-data.json
+[304] https://repo.packagist.org/p2/nette/schema.json
+[304] https://repo.packagist.org/p2/symfony/polyfill-php81.json
+Downloading https://repo.packagist.org/p2/paragonie/random_compat.json if modified
+Downloading https://repo.packagist.org/p2/nikic/php-parser.json if modified
+Downloading https://repo.packagist.org/p2/sebastian/complexity.json if modified
+Downloading https://repo.packagist.org/p2/sebastian/lines-of-code.json if modified
+Downloading https://repo.packagist.org/p2/theseer/tokenizer.json if modified
+Downloading https://repo.packagist.org/p2/sebastian/code-unit-reverse-lookup.json if modified
+Downloading https://repo.packagist.org/p2/phpunit/php-token-stream.json if modified
+Downloading https://repo.packagist.org/p2/sebastian/object-reflector.json if modified
+Downloading https://repo.packagist.org/p2/phpdocumentor/reflection-docblock.json if modified
+[304] https://repo.packagist.org/p2/symfony/event-dispatcher-contracts.json
+[304] https://repo.packagist.org/p2/paragonie/random_compat.json
+[304] https://repo.packagist.org/p2/nikic/php-parser.json
+[304] https://repo.packagist.org/p2/sebastian/complexity.json
+[304] https://repo.packagist.org/p2/sebastian/lines-of-code.json
+[304] https://repo.packagist.org/p2/theseer/tokenizer.json
+[304] https://repo.packagist.org/p2/sebastian/code-unit-reverse-lookup.json
+[304] https://repo.packagist.org/p2/phpunit/php-token-stream.json
+[304] https://repo.packagist.org/p2/sebastian/object-reflector.json
+[304] https://repo.packagist.org/p2/phpdocumentor/reflection-docblock.json
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-sebastian~diff.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-sebastian~exporter.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-amphp~amp.json from cache
+Downloading https://repo.packagist.org/p2/amphp/amp.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-amphp~byte-stream.json from cache
+Downloading https://repo.packagist.org/p2/amphp/byte-stream.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-composer~package-versions-deprecated.json from cache
+Downloading https://repo.packagist.org/p2/composer/package-versions-deprecated.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-composer~semver.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-composer~xdebug-handler.json from cache
+Downloading https://repo.packagist.org/p2/composer/xdebug-handler.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-dnoegel~php-xdg-base-dir.json from cache
+Downloading https://repo.packagist.org/p2/dnoegel/php-xdg-base-dir.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-felixfbecker~advanced-json-rpc.json from cache
+Downloading https://repo.packagist.org/p2/felixfbecker/advanced-json-rpc.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-felixfbecker~language-server-protocol.json from cache
+Downloading https://repo.packagist.org/p2/felixfbecker/language-server-protocol.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-netresearch~jsonmapper.json from cache
+Downloading https://repo.packagist.org/p2/netresearch/jsonmapper.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-openlss~lib-array2xml.json from cache
+Downloading https://repo.packagist.org/p2/openlss/lib-array2xml.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-webmozart~glob.json from cache
+Downloading https://repo.packagist.org/p2/webmozart/glob.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-webmozart~path-util.json from cache
+Downloading https://repo.packagist.org/p2/webmozart/path-util.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-ocramius~package-versions.json from cache
+Downloading https://repo.packagist.org/p2/ocramius/package-versions.json if modified
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-symfony~console.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-illuminate~pipeline.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-nette~utils.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-phpdocumentor~type-resolver.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-phpdocumentor~reflection-common.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-phpstan~phpdoc-parser.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-dflydev~markdown.json from cache
+[304] https://repo.packagist.org/p2/amphp/amp.json
+[304] https://repo.packagist.org/p2/amphp/byte-stream.json
+Downloading https://repo.packagist.org/p2/illuminate/pipeline.json if modified
+Downloading https://repo.packagist.org/p2/nette/utils.json if modified
+[304] https://repo.packagist.org/p2/composer/package-versions-deprecated.json
+[304] https://repo.packagist.org/p2/composer/xdebug-handler.json
+[304] https://repo.packagist.org/p2/dnoegel/php-xdg-base-dir.json
+[304] https://repo.packagist.org/p2/felixfbecker/advanced-json-rpc.json
+[304] https://repo.packagist.org/p2/felixfbecker/language-server-protocol.json
+[304] https://repo.packagist.org/p2/netresearch/jsonmapper.json
+[304] https://repo.packagist.org/p2/openlss/lib-array2xml.json
+[304] https://repo.packagist.org/p2/webmozart/glob.json
+[304] https://repo.packagist.org/p2/webmozart/path-util.json
+[304] https://repo.packagist.org/p2/ocramius/package-versions.json
+Downloading https://repo.packagist.org/p2/phpdocumentor/type-resolver.json if modified
+Downloading https://repo.packagist.org/p2/phpdocumentor/reflection-common.json if modified
+Downloading https://repo.packagist.org/p2/phpstan/phpdoc-parser.json if modified
+Downloading https://repo.packagist.org/p2/dflydev/markdown.json if modified
+[304] https://repo.packagist.org/p2/illuminate/pipeline.json
+[304] https://repo.packagist.org/p2/nette/utils.json
+[304] https://repo.packagist.org/p2/phpdocumentor/type-resolver.json
+[304] https://repo.packagist.org/p2/phpdocumentor/reflection-common.json
+[304] https://repo.packagist.org/p2/phpstan/phpdoc-parser.json
+[304] https://repo.packagist.org/p2/dflydev/markdown.json
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-amphp~amp.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-netresearch~jsonmapper.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-webmozart~path-util.json from cache
+Built pool.
+Running pool optimizer.
+Pool optimizer completed in 1.127 seconds
+[32mFound 8,231 package versions referenced in your dependency graph. 7,364 (89%) were optimized away.[39m
+[32mUpdating dependencies[39m
+Generating rules
+Resolving dependencies through SAT
+
+Dependency resolution completed in 0.002 seconds
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-illuminate~support.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-illuminate~support.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-illuminate~support.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-illuminate~support.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-illuminate~support.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-illuminate~support.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-illuminate~support.json from cache
+Reading C:/Users/Acer/AppData/Local/Composer/repo/https---repo.packagist.org/provider-illuminate~support.json from cache
+Downloading https://packagist.org/providers/ext-gd.json
+[200] https://packagist.org/providers/ext-gd.json
+Downloading https://packagist.org/providers/ext-gd.json
+[200] https://packagist.org/providers/ext-gd.json
+Downloading https://packagist.org/providers/ext-gd.json
+[200] https://packagist.org/providers/ext-gd.json
+Downloading https://packagist.org/providers/ext-gd.json
+[200] https://packagist.org/providers/ext-gd.json
+Downloading https://packagist.org/providers/ext-gd.json
+[200] https://packagist.org/providers/ext-gd.json
+Downloading https://packagist.org/providers/ext-gd.json
+[200] https://packagist.org/providers/ext-gd.json
+Downloading https://packagist.org/providers/ext-gd.json
+[200] https://packagist.org/providers/ext-gd.json
+Downloading https://packagist.org/providers/ext-gd.json
+[200] https://packagist.org/providers/ext-gd.json
+Downloading https://packagist.org/providers/ext-gd.json
+[200] https://packagist.org/providers/ext-gd.json
+Downloading https://packagist.org/providers/ext-gd.json
+[200] https://packagist.org/providers/ext-gd.json
+[37;41mYour requirements could not be resolved to an installable set of packages.[39;49m
+
+  Problem 1
+    - Root composer.json requires maatwebsite/excel ^3.1 -> satisfiable by maatwebsite/excel[3.1.0, 3.1.1, 3.1.2, 3.1.3, 3.1.4, 3.1.5, 3.1.6, 3.1.7, 3.1.8, 3.1.9, 3.1.10, 3.1.11, 3.1.12, 3.1.13, 3.1.14, 3.1.15, 3.1.16, 3.1.17, 3.1.18, 3.1.19, 3.1.20, 3.1.21, 3.1.22, 3.1.23, 3.1.24, 3.1.25, 3.1.26, 3.1.27, 3.1.28, 3.1.29, 3.1.30, 3.1.31, 3.1.32, 3.1.33, 3.1.34, 3.1.35, 3.1.36, 3.1.37, 3.1.38, 3.1.39, 3.1.40, 3.1.41, 3.1.42, 3.1.43, 3.1.44, 3.1.45, 3.1.46, 3.1.47, 3.1.48, 3.1.49, 3.1.50, 3.1.51, 3.1.52, 3.1.53, 3.1.54, 3.1.55, 3.1.56, 3.1.57, 3.1.58, 3.1.59, 3.1.60, 3.1.61, 3.1.62, 3.1.63, 3.1.64, 3.1.65, 3.1.66].
+    - maatwebsite/excel[3.1.0, 3.1.1, 3.1.2, 3.1.3, 3.1.4, 3.1.5, 3.1.6, 3.1.7, 3.1.8, 3.1.9, 3.1.10, 3.1.11, 3.1.12, 3.1.13, 3.1.14, 3.1.15, 3.1.16, 3.1.17, 3.1.18, 3.1.19, 3.1.20, 3.1.21, 3.1.22, 3.1.23, 3.1.24, 3.1.25] require php ^7.0 -> your php version (8.2.12) does not satisfy that requirement.
+    - maatwebsite/excel[3.1.26, 3.1.27, 3.1.28, 3.1.29, 3.1.30, 3.1.31, 3.1.32, 3.1.33, 3.1.34, 3.1.35] require illuminate/support 5.8.*|^6.0|^7.0|^8.0 -> found illuminate/support[v5.8.0, v5.8.2, v5.8.3, v5.8.4, v5.8.8, v5.8.9, v5.8.11, v5.8.12, v5.8.14, v5.8.15, v5.8.17, v5.8.18, v5.8.19, v5.8.20, v5.8.22, v5.8.24, v5.8.27, v5.8.28, v5.8.29, v5.8.30, v5.8.31, v5.8.32, v5.8.33, v5.8.34, v5.8.35, v5.8.36, v6.0.0, v6.0.1, v6.0.2, v6.0.3, v6.0.4, v6.1.0, v6.2.0, v6.3.0, v6.4.1, v6.5.0, v6.5.1, v6.5.2, v6.6.0, v6.6.1, v6.6.2, v6.7.0, v6.8.0, v6.10.0, v6.11.0, v6.12.0, v6.13.0, v6.13.1, v6.14.0, v6.15.0, v6.15.1, v6.16.0, v6.17.0, v6.17.1, v6.18.0, v6.18.1, v6.18.2, v6.18.3, v6.18.4, v6.18.5, v6.18.6, v6.18.7, v6.18.8, v6.18.9, v6.18.10, v6.18.11, v6.18.12, v6.18.13, v6.18.14, v6.18.15, v6.18.16, v6.18.17, v6.18.18, v6.18.19, v6.18.20, v6.18.21, v6.18.22, v6.18.23, v6.18.24, v6.18.25, v6.18.26, v6.18.27, v6.18.28, v6.18.29, v6.18.30, v6.18.31, v6.18.32, v6.18.33, v6.18.34, v6.18.35, v6.18.36, v6.18.37, v6.18.38, v6.18.39, v6.18.40, v6.18.41, v6.18.42, v6.18.43, v6.19.0, v6.19.1, v6.20.0, v6.20.1, v6.20.2, v6.20.3, v6.20.4, v6.20.5, v6.20.6, v6.20.7, v6.20.8, v6.20.9, v6.20.10, v6.20.11, v6.20.12, v6.20.13, v6.20.14, v6.20.15, v6.20.16, v6.20.17, v6.20.18, v6.20.19, v6.20.20, v6.20.21, v6.20.22, v6.20.23, v6.20.24, v6.20.25, v6.20.26, v6.20.27, v6.20.28, v6.20.29, v6.20.30, v6.20.31, v6.20.32, v6.20.33, v6.20.34, v6.20.35, v6.20.36, v6.20.37, v6.20.38, v6.20.39, v6.20.40, v6.20.41, v6.20.42, v6.20.43, v6.20.44, v7.0.0, v7.0.1, v7.0.2, v7.0.3, v7.0.4, v7.0.5, v7.0.6, v7.0.7, v7.0.8, v7.1.0, v7.1.1, v7.1.2, v7.1.3, v7.2.0, v7.2.1, v7.2.2, v7.3.0, v7.4.0, v7.5.0, v7.5.1, v7.5.2, v7.6.0, v7.6.1, v7.6.2, v7.7.0, v7.7.1, v7.8.0, v7.8.1, v7.9.0, v7.9.1, v7.9.2, v7.10.0, v7.10.1, v7.10.2, v7.10.3, v7.11.0, v7.12.0, v7.13.0, v7.14.0, v7.14.1, v7.15.0, v7.16.0, v7.16.1, v7.17.0, v7.17.1, v7.17.2, v7.18.0, v7.19.0, v7.19.1, v7.20.0, v7.21.0, v7.22.0, v7.22.1, v7.22.2, v7.22.3, v7.22.4, v7.23.0, v7.23.1, v7.23.2, v7.24.0, v7.25.0, v7.26.0, v7.26.1, v7.27.0, v7.28.0, v7.28.1, v7.28.2, v7.28.3, v7.28.4, v7.29.0, v7.29.1, v7.29.2, v7.29.3, v7.30.0, v7.30.1, v7.30.2, v7.30.3, v7.30.4, v7.30.5, v7.30.6, v8.0.0, v8.0.1, v8.0.2, v8.0.3, v8.0.4, v8.1.0, v8.2.0, v8.3.0, v8.4.0, v8.5.0, v8.6.0, v8.7.0, v8.7.1, v8.8.0, v8.9.0, v8.10.0, v8.11.0, v8.11.1, v8.11.2, v8.12.0, v8.12.1, v8.12.2, v8.12.3, v8.13.0, v8.14.0, v8.15.0, v8.16.0, v8.16.1, v8.17.0, v8.17.2, v8.18.0, v8.18.1, v8.19.0, v8.20.0, v8.20.1, v8.21.0, v8.22.0, v8.22.1, v8.23.1, v8.24.0, v8.25.0, v8.26.0, v8.26.1, v8.27.0, v8.28.0, v8.28.1, v8.29.0, v8.30.0, v8.30.1, v8.31.0, v8.32.0, v8.32.1, v8.33.0, v8.33.1, v8.34.0, v8.35.0, v8.35.1, v8.36.0, v8.36.1, v8.36.2, v8.37.0, v8.38.0, v8.39.0, v8.40.0, v8.41.0, v8.42.0, v8.42.1, v8.43.0, v8.44.0, v8.45.0, v8.45.1, v8.46.0, v8.47.0, v8.48.0, v8.48.1, v8.48.2, v8.49.0, v8.49.1, v8.49.2, v8.50.0, v8.51.0, v8.52.0, v8.53.0, v8.53.1, v8.54.0, v8.55.0, v8.56.0, v8.57.0, v8.58.0, v8.59.0, v8.60.0, v8.61.0, v8.62.0, v8.63.0, v8.64.0, v8.65.0, v8.66.0, v8.67.0, v8.68.0, v8.68.1, v8.69.0, v8.70.0, v8.70.1, v8.70.2, v8.71.0, v8.72.0, v8.73.0, v8.73.1, v8.73.2, v8.74.0, v8.75.0, v8.76.0, v8.76.1, v8.76.2, v8.77.0, v8.77.1, v8.78.0, v8.78.1, v8.79.0, v8.80.0, v8.81.0, v8.82.0, v8.83.0, v8.83.1, v8.83.2, v8.83.3, v8.83.4, v8.83.5, v8.83.6, v8.83.7, v8.83.8, v8.83.9, v8.83.10, v8.83.11, v8.83.12, v8.83.13, v8.83.14, v8.83.15, v8.83.16, v8.83.17, v8.83.18, v8.83.19, v8.83.20, v8.83.21, v8.83.22, v8.83.23, v8.83.24, v8.83.25, v8.83.26, v8.83.27] but these were not loaded, likely because it conflicts with another require.
+    - maatwebsite/excel[3.1.36, 3.1.37, 3.1.38, 3.1.39, 3.1.40, 3.1.41, 3.1.42, 3.1.43, 3.1.44, 3.1.45] require illuminate/support 5.8.*|^6.0|^7.0|^8.0|^9.0 -> found illuminate/support[v5.8.0, v5.8.2, v5.8.3, v5.8.4, v5.8.8, v5.8.9, v5.8.11, v5.8.12, v5.8.14, v5.8.15, v5.8.17, v5.8.18, v5.8.19, v5.8.20, v5.8.22, v5.8.24, v5.8.27, v5.8.28, v5.8.29, v5.8.30, v5.8.31, v5.8.32, v5.8.33, v5.8.34, v5.8.35, v5.8.36, v6.0.0, v6.0.1, v6.0.2, v6.0.3, v6.0.4, v6.1.0, v6.2.0, v6.3.0, v6.4.1, v6.5.0, v6.5.1, v6.5.2, v6.6.0, v6.6.1, v6.6.2, v6.7.0, v6.8.0, v6.10.0, v6.11.0, v6.12.0, v6.13.0, v6.13.1, v6.14.0, v6.15.0, v6.15.1, v6.16.0, v6.17.0, v6.17.1, v6.18.0, v6.18.1, v6.18.2, v6.18.3, v6.18.4, v6.18.5, v6.18.6, v6.18.7, v6.18.8, v6.18.9, v6.18.10, v6.18.11, v6.18.12, v6.18.13, v6.18.14, v6.18.15, v6.18.16, v6.18.17, v6.18.18, v6.18.19, v6.18.20, v6.18.21, v6.18.22, v6.18.23, v6.18.24, v6.18.25, v6.18.26, v6.18.27, v6.18.28, v6.18.29, v6.18.30, v6.18.31, v6.18.32, v6.18.33, v6.18.34, v6.18.35, v6.18.36, v6.18.37, v6.18.38, v6.18.39, v6.18.40, v6.18.41, v6.18.42, v6.18.43, v6.19.0, v6.19.1, v6.20.0, v6.20.1, v6.20.2, v6.20.3, v6.20.4, v6.20.5, v6.20.6, v6.20.7, v6.20.8, v6.20.9, v6.20.10, v6.20.11, v6.20.12, v6.20.13, v6.20.14, v6.20.15, v6.20.16, v6.20.17, v6.20.18, v6.20.19, v6.20.20, v6.20.21, v6.20.22, v6.20.23, v6.20.24, v6.20.25, v6.20.26, v6.20.27, v6.20.28, v6.20.29, v6.20.30, v6.20.31, v6.20.32, v6.20.33, v6.20.34, v6.20.35, v6.20.36, v6.20.37, v6.20.38, v6.20.39, v6.20.40, v6.20.41, v6.20.42, v6.20.43, v6.20.44, v7.0.0, v7.0.1, v7.0.2, v7.0.3, v7.0.4, v7.0.5, v7.0.6, v7.0.7, v7.0.8, v7.1.0, v7.1.1, v7.1.2, v7.1.3, v7.2.0, v7.2.1, v7.2.2, v7.3.0, v7.4.0, v7.5.0, v7.5.1, v7.5.2, v7.6.0, v7.6.1, v7.6.2, v7.7.0, v7.7.1, v7.8.0, v7.8.1, v7.9.0, v7.9.1, v7.9.2, v7.10.0, v7.10.1, v7.10.2, v7.10.3, v7.11.0, v7.12.0, v7.13.0, v7.14.0, v7.14.1, v7.15.0, v7.16.0, v7.16.1, v7.17.0, v7.17.1, v7.17.2, v7.18.0, v7.19.0, v7.19.1, v7.20.0, v7.21.0, v7.22.0, v7.22.1, v7.22.2, v7.22.3, v7.22.4, v7.23.0, v7.23.1, v7.23.2, v7.24.0, v7.25.0, v7.26.0, v7.26.1, v7.27.0, v7.28.0, v7.28.1, v7.28.2, v7.28.3, v7.28.4, v7.29.0, v7.29.1, v7.29.2, v7.29.3, v7.30.0, v7.30.1, v7.30.2, v7.30.3, v7.30.4, v7.30.5, v7.30.6, v8.0.0, v8.0.1, v8.0.2, v8.0.3, v8.0.4, v8.1.0, v8.2.0, v8.3.0, v8.4.0, v8.5.0, v8.6.0, v8.7.0, v8.7.1, v8.8.0, v8.9.0, v8.10.0, v8.11.0, v8.11.1, v8.11.2, v8.12.0, v8.12.1, v8.12.2, v8.12.3, v8.13.0, v8.14.0, v8.15.0, v8.16.0, v8.16.1, v8.17.0, v8.17.2, v8.18.0, v8.18.1, v8.19.0, v8.20.0, v8.20.1, v8.21.0, v8.22.0, v8.22.1, v8.23.1, v8.24.0, v8.25.0, v8.26.0, v8.26.1, v8.27.0, v8.28.0, v8.28.1, v8.29.0, v8.30.0, v8.30.1, v8.31.0, v8.32.0, v8.32.1, v8.33.0, v8.33.1, v8.34.0, v8.35.0, v8.35.1, v8.36.0, v8.36.1, v8.36.2, v8.37.0, v8.38.0, v8.39.0, v8.40.0, v8.41.0, v8.42.0, v8.42.1, v8.43.0, v8.44.0, v8.45.0, v8.45.1, v8.46.0, v8.47.0, v8.48.0, v8.48.1, v8.48.2, v8.49.0, v8.49.1, v8.49.2, v8.50.0, v8.51.0, v8.52.0, v8.53.0, v8.53.1, v8.54.0, v8.55.0, v8.56.0, v8.57.0, v8.58.0, v8.59.0, v8.60.0, v8.61.0, v8.62.0, v8.63.0, v8.64.0, v8.65.0, v8.66.0, v8.67.0, v8.68.0, v8.68.1, v8.69.0, v8.70.0, v8.70.1, v8.70.2, v8.71.0, v8.72.0, v8.73.0, v8.73.1, v8.73.2, v8.74.0, v8.75.0, v8.76.0, v8.76.1, v8.76.2, v8.77.0, v8.77.1, v8.78.0, v8.78.1, v8.79.0, v8.80.0, v8.81.0, v8.82.0, v8.83.0, v8.83.1, v8.83.2, v8.83.3, v8.83.4, v8.83.5, v8.83.6, v8.83.7, v8.83.8, v8.83.9, v8.83.10, v8.83.11, v8.83.12, v8.83.13, v8.83.14, v8.83.15, v8.83.16, v8.83.17, v8.83.18, v8.83.19, v8.83.20, v8.83.21, v8.83.22, v8.83.23, v8.83.24, v8.83.25, v8.83.26, v8.83.27, v9.0.0, v9.0.1, v9.0.2, v9.1.0, v9.2.0, v9.3.0, v9.3.1, v9.4.0, v9.4.1, v9.5.0, v9.5.1, v9.6.0, v9.7.0, v9.8.0, v9.8.1, v9.9.0, v9.10.0, v9.10.1, v9.11.0, v9.12.0, v9.12.1, v9.12.2, v9.13.0, v9.14.0, v9.14.1, v9.15.0, v9.16.0, v9.17.0, v9.18.0, v9.19.0, v9.20.0, v9.21.0, v9.21.1, v9.21.2, v9.21.3, v9.21.4, v9.21.5, v9.21.6, v9.22.0, v9.22.1, v9.23.0, v9.24.0, v9.25.0, v9.25.1, v9.26.0, v9.26.1, v9.27.0, v9.28.0, v9.29.0, v9.30.0, v9.30.1, v9.31.0, v9.32.0, v9.33.0, v9.34.0, v9.35.0, v9.35.1, v9.36.0, v9.36.1, v9.36.2, v9.36.3, v9.36.4, v9.37.0, v9.38.0, v9.39.0, v9.40.0, v9.40.1, v9.41.0, v9.42.0, v9.42.1, v9.42.2, v9.43.0, v9.44.0, v9.45.0, v9.45.1, v9.46.0, v9.47.0, v9.48.0, v9.49.0, v9.50.0, v9.50.1, v9.50.2, v9.51.0, v9.52.0, v9.52.1, v9.52.2, v9.52.3, v9.52.4, v9.52.5, v9.52.6, v9.52.7, v9.52.8, v9.52.9, v9.52.10, v9.52.11, v9.52.12, v9.52.13, v9.52.14, v9.52.15, v9.52.16] but these were not loaded, likely because it conflicts with another require.
+    - maatwebsite/excel[3.1.46, 3.1.47, 3.1.48, 3.1.49, 3.1.50, 3.1.51, 3.1.52, 3.1.53] require illuminate/support 5.8.*||^6.0||^7.0||^8.0||^9.0||^10.0 -> found illuminate/support[v5.8.0, v5.8.2, v5.8.3, v5.8.4, v5.8.8, v5.8.9, v5.8.11, v5.8.12, v5.8.14, v5.8.15, v5.8.17, v5.8.18, v5.8.19, v5.8.20, v5.8.22, v5.8.24, v5.8.27, v5.8.28, v5.8.29, v5.8.30, v5.8.31, v5.8.32, v5.8.33, v5.8.34, v5.8.35, v5.8.36, v6.0.0, v6.0.1, v6.0.2, v6.0.3, v6.0.4, v6.1.0, v6.2.0, v6.3.0, v6.4.1, v6.5.0, v6.5.1, v6.5.2, v6.6.0, v6.6.1, v6.6.2, v6.7.0, v6.8.0, v6.10.0, v6.11.0, v6.12.0, v6.13.0, v6.13.1, v6.14.0, v6.15.0, v6.15.1, v6.16.0, v6.17.0, v6.17.1, v6.18.0, v6.18.1, v6.18.2, v6.18.3, v6.18.4, v6.18.5, v6.18.6, v6.18.7, v6.18.8, v6.18.9, v6.18.10, v6.18.11, v6.18.12, v6.18.13, v6.18.14, v6.18.15, v6.18.16, v6.18.17, v6.18.18, v6.18.19, v6.18.20, v6.18.21, v6.18.22, v6.18.23, v6.18.24, v6.18.25, v6.18.26, v6.18.27, v6.18.28, v6.18.29, v6.18.30, v6.18.31, v6.18.32, v6.18.33, v6.18.34, v6.18.35, v6.18.36, v6.18.37, v6.18.38, v6.18.39, v6.18.40, v6.18.41, v6.18.42, v6.18.43, v6.19.0, v6.19.1, v6.20.0, v6.20.1, v6.20.2, v6.20.3, v6.20.4, v6.20.5, v6.20.6, v6.20.7, v6.20.8, v6.20.9, v6.20.10, v6.20.11, v6.20.12, v6.20.13, v6.20.14, v6.20.15, v6.20.16, v6.20.17, v6.20.18, v6.20.19, v6.20.20, v6.20.21, v6.20.22, v6.20.23, v6.20.24, v6.20.25, v6.20.26, v6.20.27, v6.20.28, v6.20.29, v6.20.30, v6.20.31, v6.20.32, v6.20.33, v6.20.34, v6.20.35, v6.20.36, v6.20.37, v6.20.38, v6.20.39, v6.20.40, v6.20.41, v6.20.42, v6.20.43, v6.20.44, v7.0.0, v7.0.1, v7.0.2, v7.0.3, v7.0.4, v7.0.5, v7.0.6, v7.0.7, v7.0.8, v7.1.0, v7.1.1, v7.1.2, v7.1.3, v7.2.0, v7.2.1, v7.2.2, v7.3.0, v7.4.0, v7.5.0, v7.5.1, v7.5.2, v7.6.0, v7.6.1, v7.6.2, v7.7.0, v7.7.1, v7.8.0, v7.8.1, v7.9.0, v7.9.1, v7.9.2, v7.10.0, v7.10.1, v7.10.2, v7.10.3, v7.11.0, v7.12.0, v7.13.0, v7.14.0, v7.14.1, v7.15.0, v7.16.0, v7.16.1, v7.17.0, v7.17.1, v7.17.2, v7.18.0, v7.19.0, v7.19.1, v7.20.0, v7.21.0, v7.22.0, v7.22.1, v7.22.2, v7.22.3, v7.22.4, v7.23.0, v7.23.1, v7.23.2, v7.24.0, v7.25.0, v7.26.0, v7.26.1, v7.27.0, v7.28.0, v7.28.1, v7.28.2, v7.28.3, v7.28.4, v7.29.0, v7.29.1, v7.29.2, v7.29.3, v7.30.0, v7.30.1, v7.30.2, v7.30.3, v7.30.4, v7.30.5, v7.30.6, v8.0.0, v8.0.1, v8.0.2, v8.0.3, v8.0.4, v8.1.0, v8.2.0, v8.3.0, v8.4.0, v8.5.0, v8.6.0, v8.7.0, v8.7.1, v8.8.0, v8.9.0, v8.10.0, v8.11.0, v8.11.1, v8.11.2, v8.12.0, v8.12.1, v8.12.2, v8.12.3, v8.13.0, v8.14.0, v8.15.0, v8.16.0, v8.16.1, v8.17.0, v8.17.2, v8.18.0, v8.18.1, v8.19.0, v8.20.0, v8.20.1, v8.21.0, v8.22.0, v8.22.1, v8.23.1, v8.24.0, v8.25.0, v8.26.0, v8.26.1, v8.27.0, v8.28.0, v8.28.1, v8.29.0, v8.30.0, v8.30.1, v8.31.0, v8.32.0, v8.32.1, v8.33.0, v8.33.1, v8.34.0, v8.35.0, v8.35.1, v8.36.0, v8.36.1, v8.36.2, v8.37.0, v8.38.0, v8.39.0, v8.40.0, v8.41.0, v8.42.0, v8.42.1, v8.43.0, v8.44.0, v8.45.0, v8.45.1, v8.46.0, v8.47.0, v8.48.0, v8.48.1, v8.48.2, v8.49.0, v8.49.1, v8.49.2, v8.50.0, v8.51.0, v8.52.0, v8.53.0, v8.53.1, v8.54.0, v8.55.0, v8.56.0, v8.57.0, v8.58.0, v8.59.0, v8.60.0, v8.61.0, v8.62.0, v8.63.0, v8.64.0, v8.65.0, v8.66.0, v8.67.0, v8.68.0, v8.68.1, v8.69.0, v8.70.0, v8.70.1, v8.70.2, v8.71.0, v8.72.0, v8.73.0, v8.73.1, v8.73.2, v8.74.0, v8.75.0, v8.76.0, v8.76.1, v8.76.2, v8.77.0, v8.77.1, v8.78.0, v8.78.1, v8.79.0, v8.80.0, v8.81.0, v8.82.0, v8.83.0, v8.83.1, v8.83.2, v8.83.3, v8.83.4, v8.83.5, v8.83.6, v8.83.7, v8.83.8, v8.83.9, v8.83.10, v8.83.11, v8.83.12, v8.83.13, v8.83.14, v8.83.15, v8.83.16, v8.83.17, v8.83.18, v8.83.19, v8.83.20, v8.83.21, v8.83.22, v8.83.23, v8.83.24, v8.83.25, v8.83.26, v8.83.27, v9.0.0, v9.0.1, v9.0.2, v9.1.0, v9.2.0, v9.3.0, v9.3.1, v9.4.0, v9.4.1, v9.5.0, v9.5.1, v9.6.0, v9.7.0, v9.8.0, v9.8.1, v9.9.0, v9.10.0, v9.10.1, v9.11.0, v9.12.0, v9.12.1, v9.12.2, v9.13.0, v9.14.0, v9.14.1, v9.15.0, v9.16.0, v9.17.0, v9.18.0, v9.19.0, v9.20.0, v9.21.0, v9.21.1, v9.21.2, v9.21.3, v9.21.4, v9.21.5, v9.21.6, v9.22.0, v9.22.1, v9.23.0, v9.24.0, v9.25.0, v9.25.1, v9.26.0, v9.26.1, v9.27.0, v9.28.0, v9.29.0, v9.30.0, v9.30.1, v9.31.0, v9.32.0, v9.33.0, v9.34.0, v9.35.0, v9.35.1, v9.36.0, v9.36.1, v9.36.2, v9.36.3, v9.36.4, v9.37.0, v9.38.0, v9.39.0, v9.40.0, v9.40.1, v9.41.0, v9.42.0, v9.42.1, v9.42.2, v9.43.0, v9.44.0, v9.45.0, v9.45.1, v9.46.0, v9.47.0, v9.48.0, v9.49.0, v9.50.0, v9.50.1, v9.50.2, v9.51.0, v9.52.0, v9.52.1, v9.52.2, v9.52.3, v9.52.4, v9.52.5, v9.52.6, v9.52.7, v9.52.8, v9.52.9, v9.52.10, v9.52.11, v9.52.12, v9.52.13, v9.52.14, v9.52.15, v9.52.16, v10.0.0, v10.0.1, v10.0.2, v10.0.3, v10.1.0, v10.1.1, v10.1.2, v10.1.3, v10.1.4, v10.1.5, v10.2.0, v10.3.0, v10.3.1, v10.3.2, v10.3.3, v10.4.0, v10.4.1, v10.5.0, v10.5.1, v10.6.0, v10.6.1, v10.6.2, v10.7.0, v10.7.1, v10.8.0, v10.9.0, v10.10.0, v10.10.1, v10.11.0, v10.12.0, v10.13.0, v10.13.1, v10.13.2, v10.13.3, v10.13.5, v10.14.0, v10.14.1, v10.15.0, v10.16.0, v10.16.1, v10.17.0, v10.17.1, v10.18.0, v10.19.0, v10.20.0, v10.21.0, v10.21.1, v10.22.0, v10.23.0, v10.23.1, v10.24.0, v10.25.0, v10.25.1, v10.26.0, v10.26.1, v10.26.2, v10.27.0, v10.28.0, v10.29.0, v10.30.0, v10.30.1, v10.31.0, v10.32.0, v10.32.1, v10.33.0, v10.34.0, v10.34.1, v10.34.2, v10.35.0, v10.36.0, v10.37.1, v10.37.2, v10.37.3, v10.38.0, v10.38.1, v10.38.2, v10.39.0, v10.40.0, v10.41.0, v10.42.0, v10.43.0, v10.44.0, v10.45.0, v10.45.1, v10.46.0, v10.47.0, v10.48.0, v10.48.1, v10.48.2, v10.48.3, v10.48.4, v10.48.5, v10.48.6, v10.48.7, v10.48.8, v10.48.9, v10.48.10, v10.48.11, v10.48.12, v10.48.13, v10.48.14, v10.48.15, v10.48.16, v10.48.17, v10.48.18, v10.48.19, v10.48.20, v10.48.22, v10.48.23, v10.48.24, v10.48.25, v10.48.26, v10.48.28] but these were not loaded, likely because it conflicts with another require.
+    - maatwebsite/excel[3.1.54, 3.1.55, 3.1.56] require phpoffice/phpspreadsheet ^1.18 -> satisfiable by phpoffice/phpspreadsheet[1.18.0, 1.19.0, 1.20.0, 1.21.0, 1.22.0, 1.23.0, 1.24.0, 1.24.1, 1.25.0, 1.25.1, 1.25.2, 1.26.0, 1.27.0, 1.27.1, 1.28.0, 1.29.0, 1.29.1, 1.29.2, 1.29.4, 1.29.5, 1.29.6, 1.29.7, 1.29.8, 1.29.9, 1.29.10, 1.29.11, 1.29.12, 1.30.0].
+    - maatwebsite/excel[3.1.57, 3.1.58] require phpoffice/phpspreadsheet ^1.29.1 -> satisfiable by phpoffice/phpspreadsheet[1.29.1, 1.29.2, 1.29.4, 1.29.5, 1.29.6, 1.29.7, 1.29.8, 1.29.9, 1.29.10, 1.29.11, 1.29.12, 1.30.0].
+    - maatwebsite/excel 3.1.59 requires phpoffice/phpspreadsheet ^1.29.2 -> satisfiable by phpoffice/phpspreadsheet[1.29.2, 1.29.4, 1.29.5, 1.29.6, 1.29.7, 1.29.8, 1.29.9, 1.29.10, 1.29.11, 1.29.12, 1.30.0].
+    - maatwebsite/excel[3.1.60, 3.1.61] require phpoffice/phpspreadsheet ^1.29.4 -> satisfiable by phpoffice/phpspreadsheet[1.29.4, 1.29.5, 1.29.6, 1.29.7, 1.29.8, 1.29.9, 1.29.10, 1.29.11, 1.29.12, 1.30.0].
+    - maatwebsite/excel 3.1.62 requires phpoffice/phpspreadsheet ^1.29.7 -> satisfiable by phpoffice/phpspreadsheet[1.29.7, 1.29.8, 1.29.9, 1.29.10, 1.29.11, 1.29.12, 1.30.0].
+    - maatwebsite/excel[3.1.63, 3.1.64] require phpoffice/phpspreadsheet ^1.29.9 -> satisfiable by phpoffice/phpspreadsheet[1.29.9, 1.29.10, 1.29.11, 1.29.12, 1.30.0].
+    - maatwebsite/excel[3.1.65, 3.1.66] require phpoffice/phpspreadsheet ^1.29.12 -> satisfiable by phpoffice/phpspreadsheet[1.29.12, 1.30.0].
+    - phpoffice/phpspreadsheet[1.18.0, 1.19.0, 1.20.0, 1.21.0, 1.22.0, 1.23.0, 1.24.0, 1.24.1, 1.25.0, 1.25.1, 1.25.2, 1.26.0, 1.27.0, 1.27.1, 1.28.0, 1.29.0, 1.29.1, 1.29.2, 1.29.4, 1.29.5, 1.29.6, 1.29.7, 1.29.8, 1.29.9, 1.29.10, 1.29.11, 1.29.12, 1.30.0] require ext-gd * -> it is missing from your system. Install or enable PHP's gd extension.
+
+To enable extensions, verify that they are enabled in your .ini files:
+    - C:\xampp\php\php.ini
+You can also run `php --ini` in a terminal to see which files are used by PHP in CLI mode.
+Alternatively, you can run Composer with `--ignore-platform-req=ext-gd` to temporarily ignore these required extensions.
+
+[37;41mInstallation failed, reverting ./composer.json and ./composer.lock to their original content.[39;49m

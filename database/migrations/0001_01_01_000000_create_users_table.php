@@ -16,8 +16,10 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
+            // Avatar profile
+            $table->string('avatar')->nullable();
             $table->string('password');
-            $table->enum('role', ['admin', 'user'])->default('user'); // 👉 kolom role ditambahkan
+            $table->enum('role', ['super-admin', 'admin', 'user'])->default('user'); // kolom role ditambahkan dengan super-admin
             $table->rememberToken();
             $table->timestamps();
         });

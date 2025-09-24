@@ -1,0 +1,116 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AssetController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\AssetPageController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\DashboardController;
+// use App\Http\Controllers\PajakController;
+use App\Http\Controllers\ServisController;
+use App\Http\Controllers\UserController;
+// use App\Http\Controllers\SplicerController;
+// use App\Http\Controllers\VehicleController;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+*/
+
+// Landing page
+Route::get('/', function () {
+    return view('welcome');
+});
+
+// Route::get('/dashboard-old', function () {
+//     return view('dashboard-old');
+// })->middleware(['auth', 'verified'])->name('dashboard-old');
+
+// ==================== DASHBOARD & ASET ==================== //
+
+// Ensure a named `login` route exists (some middleware calls route('login') during
+// the authentication redirect flow). This avoids "Route [login] not defined".
+if (! Route::has('login')) {
+    Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
+    Route::post('/login', [AuthenticatedSessionController::class, 'store']);
+}
+
+// Protected routes requiring authentication
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', [AssetController::class, 'index'])->name('dashboard');
+
+    // Asset view routes (accessible to all authenticated users)
+    Route::get('/assets', [AssetController::class, 'index'])->name('assets.index');
+    Route::get('/assets/{asset}', [AssetController::class, 'show'])->name('assets.show');
+    Route::get('/assets/{asset}/json', [AssetController::class, 'showJson'])->name('assets.showJson');
+    Route::get('/vehicles', [AssetController::class, 'vehicles'])->name('assets.vehicles');
+    Route::get('/splicers', [AssetController::class, 'splicers'])->name('assets.splicers');
+    Route::get('/export', [AssetController::class, 'export'])->name('assets.export');
+    Route::get('/export/vehicles', [AssetController::class, 'exportVehicles'])->name('assets.export.vehicles');
+    Route::get('/export/splicers', [AssetController::class, 'exportSplicers'])->name('assets.export.splicers');
+    Route::get('/assets/{asset}/export-pajak', [AssetController::class, 'exportPajak'])->name('assets.export.pajak');
+    Route::get('/assets/{asset}/export-servis', [AssetController::class, 'exportServis'])->name('assets.export.servis');
+
+    // other routes
+    Route::get('/search/advanced', function () { return view('search.advanced'); })->name('search.advanced');
+    Route::get('/reports', function () { return view('reports.index'); })->name('reports.index');
+    Route::get('/users', function () { return view('users.index'); })->name('users.index');
+    // options API
+    Route::get('/options/{category}', [App\Http\Controllers\OptionController::class, 'index']);
+
+    // Rute untuk mengelola halaman aset kustom (view only for regular users)
+    Route::get('/halaman/{slug}', [AssetPageController::class, 'show'])->name('asset-pages.show');
+    Route::get('/halaman/{slug}/export-csv', [AssetPageController::class, 'exportCsv'])->name('asset-pages.export-csv');
+});
+
+// Asset CRUD routes (only for users with kelola-aset permission)
+Route::middleware(['auth', 'verified', 'can:kelola-aset'])->group(function () {
+    Route::get('/assets/create', [AssetController::class, 'create'])->name('assets.create');
+    Route::post('/assets', [AssetController::class, 'store'])->name('assets.store');
+    Route::get('/assets/{asset}/edit', [AssetController::class, 'edit'])->name('assets.edit');
+    Route::put('/assets/{asset}', [AssetController::class, 'update'])->name('assets.update');
+    Route::delete('/assets/{asset}', [AssetController::class, 'destroy'])->name('assets.destroy');
+
+    // Holder history endpoints (previous holders)
+    Route::post('/assets/{asset}/holders', [AssetController::class, 'storeHolder'])->name('assets.holders.store');
+    Route::delete('/holders/{id}', [AssetController::class, 'deleteHolder'])->name('holders.destroy');
+
+    // Options management
+    Route::post('/options/{category}', [App\Http\Controllers\OptionController::class, 'store']);
+});
+
+// Asset Pages management routes (only for admin)
+Route::middleware(['auth', 'verified', 'can:kelola-akun'])->group(function () {
+    Route::get('/kelola-halaman', [AssetPageController::class, 'index'])->name('asset-pages.index');
+    Route::get('/asset-pages/create', [AssetPageController::class, 'create'])->name('asset-pages.create');
+    Route::post('/asset-pages', [AssetPageController::class, 'store'])->name('asset-pages.store');
+    Route::get('/asset-pages/{assetPage}/edit', [AssetPageController::class, 'edit'])->name('asset-pages.edit');
+    Route::put('/asset-pages/{assetPage}', [AssetPageController::class, 'update'])->name('asset-pages.update');
+    Route::delete('/asset-pages/{assetPage}', [AssetPageController::class, 'destroy'])->name('asset-pages.destroy');
+});
+
+// Profile routes
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::resource('assets', AssetController::class)->middleware('can:kelola-aset');
+    Route::get('assets/export/', [AssetController::class, 'export'])->name('assets.export');
+    // The routes below referencing non-existent controllers are causing the 404 error.
+    // I will comment them out for now.
+    // Route::get('assets/splicers/export/', [SplicerController::class, 'export'])->name('splicers.export');
+    // Route::get('assets/vehicles/export/', [VehicleController::class, 'export'])->name('vehicles.export');
+    Route::get('assets/servis/export/', [ServisController::class, 'export'])->name('servis.export');
+    // Route::get('assets/pajak/export/', [PajakController::class, 'export'])->name('pajak.export');
+
+    Route::resource('users', UserController::class)->middleware('can:kelola-akun');
+    // Route::resource('splicers', SplicerController::class)->middleware('can:kelola-splicer');
+    // Route::resource('vehicles', VehicleController::class)->middleware('can:kelola-kendaraan');
+    Route::resource('servis', ServisController::class)->middleware('can:kelola-servis');
+    // Route::resource('pajak', PajakController::class)->middleware('can:kelola-pajak');
+});
+
+require __DIR__.'/auth.php';
+

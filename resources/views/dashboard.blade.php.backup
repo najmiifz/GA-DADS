@@ -1,0 +1,1712 @@
+@extends('layouts.app')
+
+@section('title', 'Dashboard Assets')
+
+@section('content')
+<div class="bg-gray-50 min-h-screen">
+    <div class="container mx-auto px-4 py-6">
+        <!-- Header -->
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-gray-900">Dashboard Asset Management</h1>
+            <p class="text-gray-600 mt-2">Kelola asset perusahaan dengan mudah</p>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white rounded-xl shadow-sm p-6">
+                <div>
+                    <p class="text-sm font-medium text-gray-600">Total Assets</p>
+                    <p id="stat-total-assets" class="text-2xl font-bold text-gray-900">{{ $totalAssets }}</p>
+                </div>
+                <div class="p-3 bg-blue-50 rounded-lg">
+                    <i class="fas fa-boxes text-blue-600"></i>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-sm p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">Total Nilai</p>
+                        <p id="stat-total-nilai" class="text-2xl font-bold text-gray-900">Rp {{ number_format($totalNilai, 0, ',', '.') }}</p>
+                    </div>
+                    <div class="p-3 bg-green-50 rounded-lg">
+                        <i class="fas fa-dollar-sign text-green-600"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-sm p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">Available</p>
+                        <p id="stat-available" class="text-2xl font-bold text-gray-900">{{ $availableAssets }}</p>
+                    </div>
+                    <div class="p-3 bg-yellow-50 rounded-lg">
+                        <i class="fas fa-check-circle text-yellow-600"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-sm p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">In Use</p>
+                        <p id="stat-in-use" class="text-2xl font-bold text-gray-900">{{ $inUseAssets }}</p>
+                    </div>
+                    <div class="p-3 bg-red-50 rounded-lg">
+                        <i class="fas fa-exclamation-circle text-red-600"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Row -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            <!-- Project Distribution Chart -->
+            <div class="bg-white rounded-xl shadow-sm p-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Distribusi Project</h3>
+                <div style="height: 250px; position: relative;">
+                    <canvas id="project-pie-chart"></canvas>
+                </div>
+            </div>
+
+            <!-- Type Distribution Chart -->
+            <div class="bg-white rounded-xl shadow-sm p-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Distribusi Tipe Asset</h3>
+                <div style="height: 250px; position: relative;">
+                    <canvas id="type-bar-chart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table Section -->
+        <div class="bg-white rounded-xl shadow-sm p-6">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
+                <h2 class="text-xl font-semibold text-gray-900 mb-4 sm:mb-0">Daftar Asset</h2>
+                <div class="flex gap-3">
+                    <form id="export-form" action="{{ route('assets.export') }}" method="GET" class="m-0">
+                        <input type="hidden" name="pic" id="hidden-pic">
+                        <input type="hidden" name="tipe" id="hidden-tipe">
+                        <input type="hidden" name="project" id="hidden-project">
+                        <input type="hidden" name="lokasi" id="hidden-lokasi">
+                        <button type="submit" class="inline-flex items-center px-6 py-3 bg-green-600 text-white rounded-full shadow-md hover:bg-green-700 transition-colors" title="Ekspor CSV">
+                            <i class="fas fa-file-excel mr-3"></i>
+                            <span class="font-medium">Ekspor CSV</span>
+                        </button>
+                    </form>
+                    @can('kelola-aset')
+                    <button id="add-asset-btn" class="inline-flex items-center px-6 py-3 bg-red-600 text-white rounded-full shadow-md hover:bg-red-700 transition-colors" title="Tambah Asset">
+                        <i class="fas fa-plus mr-3"></i>
+                        <span class="font-medium">Tambah Asset</span>
+                    </button>
+                    @endcan
+                </div>
+            </div>            <!-- Filters -->
+            @php
+                $types = \App\Models\Asset::distinct()->pluck('tipe');
+                $projects = \App\Models\Asset::distinct()->pluck('project');
+                $locations = \App\Models\Asset::distinct()->pluck('lokasi');
+            @endphp
+
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6">
+                <div>
+                    <input type="text" id="search-pic" placeholder="Cari PIC..."
+                           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <select id="filter-tipe" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">Semua Tipe</option>
+                        @foreach($types as $type)
+                            <option value="{{ $type }}">{{ $type }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div>
+                    <select id="filter-project" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">Semua Project</option>
+                        @foreach($projects as $project)
+                            <option value="{{ $project }}">{{ $project }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div>
+                    <select id="filter-lokasi" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">Semua Lokasi</option>
+                        @foreach($locations as $location)
+                            <option value="{{ $location }}">{{ $location }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div>
+                    <button id="reset-filters" class="w-full px-3 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition-colors">
+                        Reset Filter
+                    </button>
+                </div>
+            </div>
+
+            <!-- Asset Table -->
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tipe</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jenis Asset</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">PIC</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Merk</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Serial Number</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Project</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Lokasi</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tahun</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Harga Beli</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Harga Sewa</th>
+                            <!-- Status column removed; availability shown in PIC column -->
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="asset-table-body" class="bg-white divide-y divide-gray-200">
+                        @foreach($assets as $asset)
+                        <tr class="hover:bg-gray-50 transition-colors duration-150">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $asset->tipe }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $asset->jenis_aset }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                @if($asset->pic === 'Available')
+                                    <span class="inline-flex px-3 py-1 text-sm font-semibold rounded-full bg-green-100 text-green-800">Available</span>
+                                @else
+                                    <div class="text-sm text-gray-900">{{ $asset->pic }}</div>
+                                @endif
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $asset->merk }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $asset->serial_number }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $asset->project }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $asset->lokasi }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $asset->tanggal_beli ? \Carbon\Carbon::parse($asset->tanggal_beli)->format('d M Y') : 'N/A' }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Rp {{ number_format($asset->harga_beli, 0, ',', '.') }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Rp {{ number_format($asset->harga_sewa, 0, ',', '.') }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <div class="flex items-center gap-2">
+                                    <button onclick="viewAsset({{ $asset->id }})"
+                                            class="text-blue-600 hover:text-blue-900 transition-colors"
+                                            title="Lihat Detail">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    @can('kelola-aset')
+                                    <button onclick="editAsset({{ $asset->id }})"
+                                            class="text-yellow-600 hover:text-yellow-900 transition-colors"
+                                            title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button onclick="deleteAsset({{ $asset->id }})"
+                                            class="text-red-600 hover:text-red-900 transition-colors"
+                                            title="Hapus">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                    @endcan
+                                </div>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6 mt-4">
+                @if($assets instanceof \Illuminate\Pagination\LengthAwarePaginator)
+                    <div class="flex-1 flex justify-between sm:hidden">
+                        <a href="{{ $assets->previousPageUrl() ?: '#' }}" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 {{ $assets->previousPageUrl() ? '' : 'opacity-50 pointer-events-none' }}">Prev</a>
+                        <a href="{{ $assets->nextPageUrl() ?: '#' }}" class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 {{ $assets->nextPageUrl() ? '' : 'opacity-50 pointer-events-none' }}">Next</a>
+                    </div>
+
+                    <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                        <div>
+                            <p class="text-sm text-gray-600">
+                                Menampilkan {{ $assets->firstItem() ?? 0 }}-{{ $assets->lastItem() ?? 0 }} dari {{ $assets->total() ?? 0 }}
+                            </p>
+                        </div>
+
+                        <div class="flex space-x-4">
+                            <a href="{{ $assets->previousPageUrl() }}" class="{{ !$assets->onFirstPage() ? 'px-4 py-2 bg-white border border-gray-300 rounded-md hover:bg-gray-50' : 'px-4 py-2 bg-gray-100 border border-gray-300 rounded-md text-gray-400 cursor-not-allowed' }}">
+                                Prev
+                            </a>
+                            <a href="{{ $assets->nextPageUrl() }}" class="{{ $assets->hasMorePages() ? 'px-4 py-2 bg-white border border-gray-300 rounded-md hover:bg-gray-50' : 'px-4 py-2 bg-gray-100 border border-gray-300 rounded-md text-gray-400 cursor-not-allowed' }}">
+                                Next
+                            </a>
+                        </div>
+                    </div>
+                @else
+                    <div class="flex-1 flex justify-between sm:hidden">
+                        <button class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">Previous</button>
+                        <button class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">Next</button>
+                    </div>
+                    <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                        <div>
+                            <p class="text-sm text-gray-600">
+                                Menampilkan 1-{{ count($assets) }} dari {{ count($assets) }}
+                            </p>
+                        </div>
+                    </div>
+                @endif
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Tambah Asset -->
+<div id="asset-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
+    <div class="flex items-center justify-center min-h-screen p-4">
+        <div class="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-xl">
+            <div class="p-8">
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-2xl font-bold text-gray-900">Tambah Asset Baru</h2>
+                    <button data-close-modal class="text-gray-400 hover:text-gray-600 p-2">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+
+                <form id="asset-form" method="POST" action="{{ route('assets.store') }}" enctype="multipart/form-data">
+                    @csrf
+                    <!-- Form fields dengan layout yang lebih rapi -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Tipe -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Tipe</label>
+                            <select name="tipe" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                                <option value="">Pilih Tipe</option>
+                                @foreach($tipes as $tipe)
+                                    <option value="{{ $tipe }}">{{ $tipe }}</option>
+                                @endforeach
+                                <option value="__add__">--- Tambah Baru ---</option>
+                            </select>
+                        </div>
+
+                        <!-- Jenis Asset -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Jenis Asset</label>
+                            <select name="jenis_aset" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                                <option value="">Pilih Jenis Asset</option>
+                                @foreach($jenisAsets as $jenis)
+                                    <option value="{{ $jenis }}">{{ $jenis }}</option>
+                                @endforeach
+                                <option value="__add__">--- Tambah Baru ---</option>
+                            </select>
+                        </div>
+
+                        <!-- PIC -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">PIC</label>
+                            <select name="pic" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                                <option value="">Pilih PIC</option>
+                                <option value="Available" class="bg-green-100 text-green-800 font-semibold">Available</option>
+                                @foreach($pics as $pic)
+                                    @if($pic !== 'Available')
+                                        <option value="{{ $pic }}">{{ $pic }}</option>
+                                    @endif
+                                @endforeach
+                                <option value="__add__">--- Tambah Baru ---</option>
+                            </select>
+                        </div>
+
+                        <!-- Merk -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Merk</label>
+                            <input type="text" name="merk" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                        </div>
+
+                        <!-- Serial Number -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Serial Number</label>
+                            <input type="text" name="serial_number" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+
+                        <!-- Project -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Project</label>
+                            <select name="project" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                                <option value="">Pilih Project</option>
+                                @foreach($projects as $project)
+                                    <option value="{{ $project }}">{{ $project }}</option>
+                                @endforeach
+                                <option value="__add__">--- Tambah Baru ---</option>
+                            </select>
+                        </div>
+
+                        <!-- Lokasi -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Lokasi</label>
+                            <select name="lokasi" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                                <option value="">Pilih Lokasi</option>
+                                @foreach($lokasis as $lokasi)
+                                    <option value="{{ $lokasi }}">{{ $lokasi }}</option>
+                                @endforeach
+                                <option value="__add__">--- Tambah Baru ---</option>
+                            </select>
+                        </div>
+
+                        <!-- Tahun Beli -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Tahun Beli</label>
+                            <input type="date" name="tanggal_beli" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" value="{{ old('tanggal_beli', '') }}">
+                        </div>
+
+                        <!-- Harga Beli -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Harga Beli</label>
+                            <input type="number" name="harga_beli" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" min="0">
+                        </div>
+
+                        <!-- Harga Sewa -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Harga Sewa</label>
+                            <input type="number" name="harga_sewa" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" min="0">
+                        </div>
+
+                        <!-- Status -->
+                        <!-- status removed; availability determined by PIC == 'Available' -->
+
+                        <!-- Data Pajak (for Kendaraan) -->
+                        <div class="hidden" id="modal-pajak">
+                            <div class="border-t pt-6 mt-6">
+                                <h3 class="text-base font-medium text-gray-700 mb-4">Data Pajak</h3>
+
+                                <div class="flex flex-wrap -mx-3">
+                                    <div class="w-full px-3 md:w-1/3 mb-4">
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Tanggal Pajak</label>
+                                        <input type="text" name="tanggal_pajak_display" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none" placeholder="dd/mm/yyyy" onfocus="(this.type='date')" onblur="if(!this.value) this.type='text'">
+                                        <input type="hidden" name="tanggal_pajak">
+                                    </div>
+                                    <div class="w-full px-3 md:w-1/3 mb-4">
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Jumlah Pajak</label>
+                                        <input type="number" name="jumlah_pajak" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none" placeholder="0">
+                                    </div>
+                                    <div class="w-full px-3 md:w-1/3 mb-4">
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Status Pajak</label>
+                                        <select name="status_pajak" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none">
+                                            <option value="">-- Pilih Status --</option>
+                                            <option value="Lunas">Lunas</option>
+                                            <option value="Belum Lunas">Belum Lunas</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Riwayat Servis (for Kendaraan & Splicer) -->
+                        <div class="hidden" id="modal-servis">
+                            <div class="border-t pt-6 mt-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h3 class="text-base font-medium text-gray-700">Riwayat Servis</h3>
+                                    @can('kelola-aset')
+                                    <button id="add-service-modal" type="button" class="px-5 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors">
+                                        Tambah Riwayat
+                                    </button>
+                                    @endcan
+                                </div>
+                                <div id="service-rows-modal">
+                                    <!-- Baris servis akan diisi dengan JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end gap-4 mt-8 pt-6 border-t border-gray-200">
+                        <button type="button" data-close-modal class="px-6 py-2.5 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition-colors font-medium">
+                            Batal
+                        </button>
+                        <button type="submit" class="px-6 py-2.5 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium">
+                            Simpan
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Detail Asset -->
+<div id="asset-detail-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
+    <div class="flex items-center justify-center min-h-screen p-4">
+        <div class="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-xl">
+            <div class="p-8">
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-2xl font-bold text-gray-900">Detail Asset</h2>
+                    <button onclick="closeDetailModal()" class="text-gray-400 hover:text-gray-600 p-2">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+
+                <!-- Detail Content -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Informasi Dasar -->
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h3 class="text-lg font-semibold mb-4 text-gray-800">Informasi Dasar</h3>
+                        <div class="space-y-3">
+                            <div>
+                                <label class="text-sm font-medium text-gray-600">Tipe:</label>
+                                <p class="text-gray-900" id="detail-tipe">-</p>
+                            </div>
+                            <div>
+                                <label class="text-sm font-medium text-gray-600">Jenis Asset:</label>
+                                <p class="text-gray-900" id="detail-jenis-aset">-</p>
+                            </div>
+                            <div>
+                                <label class="text-sm font-medium text-gray-600">Merk:</label>
+                                <p class="text-gray-900" id="detail-merk">-</p>
+                            </div>
+                            <div>
+                                <label class="text-sm font-medium text-gray-600">Serial Number:</label>
+                                <p class="text-gray-900" id="detail-serial-number">-</p>
+                            </div>
+                            <div>
+                                <label class="text-sm font-medium text-gray-600">PIC:</label>
+                                <p class="text-gray-900" id="detail-pic">-</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lokasi & Project -->
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h3 class="text-lg font-semibold mb-4 text-gray-800">Lokasi & Project</h3>
+                        <div class="space-y-3">
+                            <div>
+                                <label class="text-sm font-medium text-gray-600">Project:</label>
+                                <p class="text-gray-900" id="detail-project">-</p>
+                            </div>
+                            <div>
+                                <label class="text-sm font-medium text-gray-600">Lokasi:</label>
+                                <p class="text-gray-900" id="detail-lokasi">-</p>
+                            </div>
+                            <div>
+                                <label class="text-sm font-medium text-gray-600">Status:</label>
+                                <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full" id="detail-status">-</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Informasi Finansial -->
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h3 class="text-lg font-semibold mb-4 text-gray-800">Informasi Finansial</h3>
+                        <div class="space-y-3">
+                            <div>
+                                <label class="text-sm font-medium text-gray-600">Tanggal Beli:</label>
+                                <p class="text-gray-900" id="detail-tanggal-beli">-</p>
+                            </div>
+                            <div>
+                                <label class="text-sm font-medium text-gray-600">Harga Beli:</label>
+                                <p class="text-gray-900" id="detail-harga-beli">-</p>
+                            </div>
+                            <div>
+                                <label class="text-sm font-medium text-gray-600">Harga Sewa:</label>
+                                <p class="text-gray-900" id="detail-harga-sewa">-</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Data Pajak (for Kendaraan) -->
+                    <div class="bg-gray-50 p-6 rounded-lg" id="detail-pajak-section" style="display: none;">
+                        <h3 class="text-lg font-semibold mb-4 text-gray-800">Data Pajak</h3>
+                        <div class="space-y-3">
+                            <div>
+                                <label class="text-sm font-medium text-gray-600">Tanggal Pajak:</label>
+                                <p class="text-gray-900" id="detail-tanggal-pajak">-</p>
+                            </div>
+                            <div>
+                                <label class="text-sm font-medium text-gray-600">Jumlah Pajak:</label>
+                                <p class="text-gray-900" id="detail-jumlah-pajak">-</p>
+                            </div>
+                            <div>
+                                <label class="text-sm font-medium text-gray-600">Status Pajak:</label>
+                                <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full" id="detail-status-pajak">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Riwayat Servis (for Kendaraan & Splicer) -->
+                <div id="detail-servis-section" style="display: none;" class="mt-6">
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h3 class="text-lg font-semibold mb-4 text-gray-800">Riwayat Servis</h3>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full bg-white rounded-lg">
+                                <thead class="bg-gray-100">
+                                    <tr>
+                                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Tanggal</th>
+                                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Deskripsi</th>
+                                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Biaya</th>
+                                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Vendor</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="detail-servis-body">
+                                    <!-- Riwayat servis akan diisi di sini -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-end gap-4 mt-8 pt-6 border-t border-gray-200">
+                    <button onclick="closeDetailModal()" class="px-6 py-2.5 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition-colors font-medium">
+                        Tutup
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Toast Notification telah dihapus sesuai permintaan -->
+
+@endsection
+
+@push('scripts')
+<script>
+// Global permission check
+const canManageAssets = @json(auth()->user()->can('kelola-aset'));
+console.log('Can manage assets:', canManageAssets);
+console.log('Current user:', @json(auth()->user()->email));
+console.log('User roles:', @json(auth()->user()->getRoleNames()));
+
+// Initialize when DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Dashboard initializing...');
+    console.log('Chart.js available:', typeof Chart !== 'undefined');
+    
+    // Initialize charts and filters
+    initializeCharts();
+    initializeFilters();
+});
+
+// Chart variables
+let projectChart = null;
+let typeChart = null;
+
+function initializeCharts() {
+    console.log('Initializing charts...');
+    
+    // Project data from server
+    const projectLabels = @json(isset($projectSummary) ? array_keys($projectSummary->toArray()) : []);
+    const projectData = @json(isset($projectSummary) ? array_values($projectSummary->toArray()) : []);
+    
+    // Type data from server  
+    const typeLabels = @json(isset($jenisSummary) ? array_keys($jenisSummary->toArray()) : []);
+    const typeData = @json(isset($jenisSummary) ? array_values($jenisSummary->toArray()) : []);
+    
+    console.log('Project data:', { labels: projectLabels, data: projectData });
+    console.log('Type data:', { labels: typeLabels, data: typeData });
+    
+    // Create project pie chart
+    const projectCtx = document.getElementById('project-pie-chart');
+    if (projectCtx && projectLabels.length > 0) {
+        try {
+            projectChart = new Chart(projectCtx, {
+                type: 'pie',
+                data: {
+                    labels: projectLabels,
+                    datasets: [{
+                        data: projectData,
+                        backgroundColor: [
+                            '#3b82f6', '#f59e0b', '#10b981', '#8b5cf6', '#ef4444', '#06b6d4',
+                            '#f97316', '#84cc16', '#ec4899', '#6366f1'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: {
+                                boxWidth: 12,
+                                font: { size: 11 }
+                            }
+                        }
+                    }
+                }
+            });
+            console.log('Project chart created successfully');
+        } catch (error) {
+            console.error('Error creating project chart:', error);
+        }
+    } else {
+        console.log('Project chart: no data or canvas not found');
+    }
+    
+    // Create type bar chart
+    const typeCtx = document.getElementById('type-bar-chart');
+    if (typeCtx && typeLabels.length > 0) {
+        try {
+            typeChart = new Chart(typeCtx, {
+                type: 'bar',
+                data: {
+                    labels: typeLabels,
+                    datasets: [{
+                        data: typeData,
+                        backgroundColor: [
+                            '#3b82f6', '#10b981', '#f59e0b', '#8b5cf6', '#06b6d4', '#ef4444'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+            console.log('Type chart created successfully');
+        } catch (error) {
+            console.error('Error creating type chart:', error);
+        }
+    } else {
+        console.log('Type chart: no data or canvas not found');
+    }
+}
+
+function initializeFilters() {
+    console.log('Initializing filters...');
+    
+    // Get filter elements
+    const filterBtn = document.getElementById('filter-btn');
+    const filterModal = document.getElementById('filter-modal');
+    const closeFilterBtn = document.getElementById('close-filter');
+    const clearFilterBtn = document.getElementById('clear-filter');
+    const applyFilterBtn = document.getElementById('apply-filter');
+    
+    if (!filterBtn || !filterModal) {
+        console.log('Filter elements not found, skipping filter initialization');
+        return;
+    }
+    
+    // Show filter modal
+    filterBtn.addEventListener('click', function() {
+        filterModal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    });
+    
+    // Close filter modal
+    function closeModal() {
+        filterModal.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+    }
+    
+    if (closeFilterBtn) closeFilterBtn.addEventListener('click', closeModal);
+    
+    // Close on backdrop click
+    filterModal.addEventListener('click', function(e) {
+        if (e.target === filterModal) {
+            closeModal();
+        }
+    });
+    
+    // Clear filters
+    if (clearFilterBtn) {
+        clearFilterBtn.addEventListener('click', function() {
+            const form = document.getElementById('filter-form');
+            if (form) {
+                form.reset();
+                // Redirect to clear URL params
+                window.location.href = '{{ route("dashboard") }}';
+            }
+        });
+    }
+    
+    // Apply filters
+    if (applyFilterBtn) {
+        applyFilterBtn.addEventListener('click', function() {
+            const form = document.getElementById('filter-form');
+            if (form) {
+                form.submit();
+            }
+        });
+    }
+    
+    console.log('Filters initialized successfully');
+}
+
+    // Elements
+    const addAssetBtn = document.getElementById('add-asset-btn');
+    const modal = document.getElementById('asset-modal');
+    const assetForm = document.getElementById('asset-form');
+    const closeModalBtns = document.querySelectorAll('[data-close-modal]');
+
+    // Store original stats data
+    const originalStats = {
+        totalAssets: document.querySelector('.container .grid.grid-cols-1.md\\:grid-cols-4 > div:nth-child(1) p.text-2xl')?.textContent.trim(),
+        totalNilai: document.querySelector('.container .grid.grid-cols-1.md\\:grid-cols-4 > div:nth-child(2) p.text-2xl')?.textContent.trim(),
+        available: document.querySelector('.container .grid.grid-cols-1.md\\:grid-cols-4 > div:nth-child(3) p.text-2xl')?.textContent.trim(),
+        inUse: document.querySelector('.container .grid.grid-cols-1.md\\:grid-cols-4 > div:nth-child(4) p.text-2xl')?.textContent.trim()
+    };
+
+    // Extract the numeric value from totalNilai
+    const totalNilaiText = originalStats.totalNilai || 'Rp 0';
+    const totalNilaiValue = parseInt(totalNilaiText.replace(/[^\d]/g, '')) || 0;
+    originalStats.totalNilaiValue = totalNilaiValue;
+
+    console.log('Original stats values:', originalStats);
+
+    // Check elements
+    if (!addAssetBtn || !modal) {
+        console.error('Critical elements missing!');
+        return;
+    }
+
+    console.log('All elements found successfully');
+
+    // --- MODAL FUNCTIONS ---
+    function showModal() {
+        console.log('Showing modal');
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function hideModal() {
+        console.log('Hiding modal');
+        modal.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+        assetForm.reset();
+    }
+
+    function showToast(message, isSuccess = true) {
+        // Fungsi toast dinonaktifkan sesuai permintaan
+        console.log('Toast message (tidak ditampilkan):', message);
+        // Tidak menampilkan notifikasi visual
+    }
+
+    // --- EVENT LISTENERS ---
+    addAssetBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        console.log('Add Asset button clicked');
+        showModal();
+    });
+
+    // Close modal handlers
+    closeModalBtns.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            hideModal();
+        });
+    });
+
+    // detail modal close handlers
+    const detailModal = document.getElementById('asset-detail-modal');
+    const closeDetailBtns = [document.getElementById('close-detail-modal'), document.getElementById('close-detail-ok')];
+    closeDetailBtns.forEach(b => { if (b) b.addEventListener('click', (e) => { e.preventDefault(); detailModal.classList.add('hidden'); document.body.style.overflow = 'auto'; }); });
+
+    // Close on backdrop click
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            hideModal();
+        }
+    });
+
+    // Form submission
+    assetForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        console.log('Form submitted');
+
+        const formData = new FormData(assetForm);
+        const submitBtn = assetForm.querySelector('button[type="submit"]');
+
+        // Show loading
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Menyimpan...';
+
+        try {
+            const response = await fetch(assetForm.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                }
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                showToast('Asset berhasil ditambahkan!', true);
+                hideModal();
+                // prepend new row to table if server returned asset
+                if (data.asset) {
+                    try {
+                        const a = data.asset;
+                        const tbody = document.getElementById('asset-table-body');
+                        const tr = document.createElement('tr');
+                        tr.className = 'hover:bg-gray-50 transition-colors duration-150';
+                        tr.innerHTML = `
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${a.tipe || ''}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${a.jenis_aset || ''}</td>
+                            <td class="px-6 py-4 whitespace-nowrap"><span title="${a.pic || ''}" class="inline-flex px-3 py-1 text-sm font-semibold rounded-full shadow-sm ${a.pic == 'Available' ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'}">${a.pic == 'Available' ? 'Available' : (a.pic || '')}</span></td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${a.merk || ''}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${a.serial_number || ''}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${a.project || ''}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${a.lokasi || ''}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${a.tahun_beli || ''}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Rp ${Number(a.harga_beli || 0).toLocaleString('id-ID')}</td>
+
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <div class="flex items-center gap-2">
+                                    <button onclick="viewAsset(${a.id})" class="text-blue-600 hover:text-blue-900 transition-colors" title="Lihat Detail"><i class="fas fa-eye"></i></button>
+                                    ${canManageAssets ? `
+                                    <button onclick="editAsset(${a.id})" class="text-yellow-600 hover:text-yellow-900 transition-colors" title="Edit"><i class="fas fa-edit"></i></button>
+                                    <button onclick="deleteAsset(${a.id})" class="text-red-600 hover:text-red-900 transition-colors" title="Hapus"><i class="fas fa-trash"></i></button>
+                                    ` : ''}
+                                </div>
+                            </td>
+                        `;
+                        tbody.insertBefore(tr, tbody.firstChild);
+                    } catch (err) {
+                        console.error('Failed to prepend row', err);
+                    }
+                }
+            } else {
+                const errorData = await response.json();
+                showToast(errorData.message || 'Gagal menyimpan data', false);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            showToast('Terjadi kesalahan: ' + error.message, false);
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Simpan';
+        }
+    });
+
+    // show/hide pajak & servis when tipe is Kendaraan
+    const tipeSelectModal = assetForm.querySelector('select[name="tipe"]');
+    const pajakSectionModal = document.getElementById('modal-pajak');
+    const servisSectionModal = document.getElementById('modal-servis');
+
+    function updateModalVehicleSections2() {
+        if (!tipeSelectModal) return;
+        const tipeVal = (tipeSelectModal.value || '').toString();
+        const isVehicle = tipeVal === 'Kendaraan';
+        const hasService = isVehicle || tipeVal === 'Splicer';
+        pajakSectionModal?.classList.toggle('hidden', !isVehicle);
+        servisSectionModal?.classList.toggle('hidden', !hasService);
+    }
+    tipeSelectModal?.addEventListener('change', updateModalVehicleSections2);
+
+    // Detail modal sections (for viewing an asset)
+    const detailPajakSection = document.getElementById('detail-pajak-section');
+    const detailServisSection = document.getElementById('detail-servis-section');
+    const detailServicesSection = document.getElementById('detail-services-section');
+
+    function updateDetailVehicleSections(isVehicle) {
+        // If it's a vehicle, show servis/tax sections; otherwise hide them
+        if (detailPajakSection) detailPajakSection.classList.toggle('hidden', !isVehicle);
+        if (detailServisSection) detailServisSection.classList.toggle('hidden', !isVehicle);
+        if (detailServicesSection) detailServicesSection.classList.toggle('hidden', !isVehicle);
+    }
+
+    // service rows add/remove for modal
+    document.addEventListener('click', function(e) {
+        if (e.target && e.target.id === 'add-service-modal') {
+            const container = document.getElementById('service-rows-modal');
+            const div = document.createElement('div');
+            div.className = 'flex gap-3 items-center service-row mb-3 bg-white border rounded-lg p-3';
+            div.innerHTML =
+                '<input type="hidden" name="service_id[]" value="">' +
+                '<input type="hidden" name="existing_service_file[]" value="">' +
+                '<div style="width: 180px; flex: 0 0 180px;">' +
+                    '<input type="text" name="service_date[]" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none" placeholder="dd/mm/yyyy" onfocus="(this.type=\'date\')" onblur="if(!this.value) this.type=\'text\'">' +
+                '</div>' +
+                '<div class="flex-1">' +
+                    '<input type="text" name="service_desc[]" placeholder="Keterangan servis" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none">' +
+                '</div>' +
+                '<div style="width: 140px; flex: 0 0 140px;">' +
+                    '<input type="number" name="service_cost[]" placeholder="Biaya" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none">' +
+                '</div>' +
+                '<div style="width: 160px; flex: 0 0 160px;">' +
+                    '<input type="text" name="service_vendor[]" placeholder="Vendor" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none">' +
+                '</div>' +
+                '<div class="flex items-center gap-2">' +
+                    '<label class="px-3 py-1.5 bg-gray-100 text-gray-700 rounded-md border border-gray-300 cursor-pointer">' +
+                        'Pilih File' +
+                        '<input type="file" name="service_file[]" class="hidden">' +
+                    '</label>' +
+                    '<button type="button" class="text-red-600 remove-service">✕</button>' +
+                '</div>';
+            container.appendChild(div);
+        }
+
+        if (e.target && e.target.classList && e.target.classList.contains('remove-service')) {
+            const row = e.target.closest('.service-row');
+            row?.remove();
+        }
+    });
+
+    // --- CHARTS ---
+    // Global chart references
+    let projectChart = null;
+    let typeChart = null;
+
+    // Store original chart data
+    let originalProjectChartData = { labels: [], data: [] };
+    let originalTypeChartData = { labels: [], data: [] };
+
+    // sanitize labels/data: replace empty/null labels and ensure arrays have same length
+    function sanitizePairs(labels, data) {
+        const L = Array.isArray(labels) ? labels.slice() : [];
+        const D = Array.isArray(data) ? data.slice() : [];
+        // pad shorter array with zeros
+        while (D.length < L.length) D.push(0);
+        while (L.length < D.length) L.push('Tidak Ditentukan');
+        for (let i = 0; i < L.length; i++) {
+            if (L[i] === null || L[i] === undefined || (typeof L[i] === 'string' && L[i].trim() === '')) {
+                L[i] = 'Tidak Ditentukan';
+            }
+            // ensure numeric data
+            D[i] = Number(D[i]) || 0;
+        }
+        // remove zero-count entries to keep charts clean
+        const finalLabels = [];
+        const finalData = [];
+        for (let i = 0; i < L.length; i++) {
+            if (D[i] !== 0) {
+                finalLabels.push(L[i]);
+                finalData.push(D[i]);
+            }
+        }
+        // if everything was zero, keep one placeholder so chart doesn't crash
+        if (finalLabels.length === 0) {
+            return { labels: ['Tidak Ada Data'], data: [1] };
+        }
+        return { labels: finalLabels, data: finalData };
+    }
+
+    function createCharts() {
+        console.log('Creating charts...');
+        console.log('Chart.js loaded:', typeof Chart !== 'undefined');
+        
+        // Prepare server-side data (safely fallback to empty arrays)
+        const projectLabels = @json(isset($projectSummary) ? array_values($projectSummary->keys()->all()) : []);
+        const projectData   = @json(isset($projectSummary) ? array_values($projectSummary->values()->all()) : []);
+
+        console.log('Raw project data:', projectLabels, projectData);
+
+        // Project Pie Chart
+        const projectCtx = document.getElementById('project-pie-chart');
+        console.log('Project canvas element:', projectCtx);
+        
+        if (projectCtx) {
+            const p = sanitizePairs(projectLabels, projectData);
+            console.log('Project chart labels/data:', p.labels, p.data);
+
+            // Store original data
+            originalProjectChartData = {
+                labels: [...p.labels],
+                data: [...p.data]
+            };
+
+            try {
+                projectChart = new Chart(projectCtx, {
+                    type: 'pie',
+                    data: {
+                        labels: p.labels,
+                        datasets: [{
+                            data: p.data,
+                            backgroundColor: ['#3b82f6', '#f59e0b', '#10b981', '#8b5cf6', '#ef4444', '#06b6d4'],
+                            borderWidth: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: {
+                                boxWidth: 12,
+                                font: { size: 11 }
+                            }
+                        }
+                    }
+                }
+            });
+            console.log('Project chart created successfully');
+            } catch (error) {
+                console.error('Error creating project chart:', error);
+            }
+        } else {
+            console.error('Project chart canvas element not found');
+        }
+
+        // Type Bar Chart (jenisSummary)
+        const typeLabels = @json(isset($jenisSummary) ? array_values($jenisSummary->keys()->all()) : []);
+        const typeData   = @json(isset($jenisSummary) ? array_values($jenisSummary->values()->all()) : []);
+
+        console.log('Raw type data:', typeLabels, typeData);
+
+        const typeCtx = document.getElementById('type-bar-chart');
+        console.log('Type canvas element:', typeCtx);
+        
+        if (typeCtx) {
+            const t = sanitizePairs(typeLabels, typeData);
+            console.log('Type chart labels/data:', t.labels, t.data);
+
+            // Store original data
+            originalTypeChartData = {
+                labels: [...t.labels],
+                data: [...t.data]
+            };
+
+            try {
+                const maxVal = t.data.length ? Math.max.apply(null, t.data) : 1;
+                typeChart = new Chart(typeCtx, {
+                    type: 'bar',
+                data: {
+                    labels: t.labels,
+                    datasets: [{
+                        data: t.data,
+                        backgroundColor: ['#3b82f6', '#10b981', '#f59e0b', '#8b5cf6', '#06b6d4', '#ef4444']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            suggestedMax: Math.ceil(maxVal + 1)
+                        }
+                    }
+                }
+            });
+            console.log('Type chart created successfully');
+            } catch (error) {
+                console.error('Error creating type chart:', error);
+            }
+        } else {
+            console.error('Type chart canvas element not found');
+        }
+    }
+
+    // --- FILTERS ---
+    function initFilters() {
+        const searchInput = document.getElementById('search-pic');
+        const filterTipe = document.getElementById('filter-tipe');
+        const filterProject = document.getElementById('filter-project');
+        const filterLokasi = document.getElementById('filter-lokasi');
+        const resetBtn = document.getElementById('reset-filters');
+
+
+        // Function to update stats cards at the top of the dashboard
+        function updateStatsCards(totalAssets, totalNilai, availableCount, inUseCount) {
+            console.log('Updating stats cards with:', { totalAssets, totalNilai, availableCount, inUseCount });
+
+            // Update Total Assets - lebih spesifik selector
+            const totalAssetsEl = document.getElementById('stat-total-assets');
+            if (totalAssetsEl) {
+                totalAssetsEl.textContent = totalAssets;
+                console.log('Updated Total Assets to:', totalAssets);
+            } else {
+                console.error('Total Assets element not found');
+            }
+
+            // Update Total Nilai
+            const totalNilaiEl = document.getElementById('stat-total-nilai');
+            if (totalNilaiEl) {
+                totalNilaiEl.textContent = 'Rp ' + totalNilai.toLocaleString('id-ID');
+                console.log('Updated Total Nilai to:', 'Rp ' + totalNilai.toLocaleString('id-ID'));
+            } else {
+                console.error('Total Nilai element not found');
+            }
+
+            // Update Available
+            const availableEl = document.getElementById('stat-available');
+            if (availableEl) {
+                availableEl.textContent = availableCount;
+                console.log('Updated Available to:', availableCount);
+            } else {
+                console.error('Available element not found');
+            }
+
+            // Update In Use
+            const inUseEl = document.getElementById('stat-in-use');
+            if (inUseEl) {
+                inUseEl.textContent = inUseCount;
+                console.log('Updated In Use to:', inUseCount);
+            } else {
+                console.error('In Use element not found');
+            }
+        }
+
+        // Function to update charts based on filtered data
+        function updateChartsWithFilteredData(filteredRows) {
+            if (!projectChart || !typeChart) return;
+
+            // Count filtered assets by project and type
+            const projectCounts = {};
+            const typeCounts = {};
+
+            filteredRows.forEach(row => {
+                const cells = row.querySelectorAll('td');
+                if (cells.length === 0) return;
+
+                const tipe = cells[0]?.textContent.trim() || '';
+                const project = cells[5]?.textContent.trim() || '';
+
+                // Count by project
+                if (project) {
+                    projectCounts[project] = (projectCounts[project] || 0) + 1;
+                }
+
+                // Count by type
+                if (tipe) {
+                    typeCounts[tipe] = (typeCounts[tipe] || 0) + 1;
+                }
+            });
+
+            // Update project chart
+            const projectLabels = Object.keys(projectCounts);
+            const projectData = Object.values(projectCounts);
+            const sanitizedProject = sanitizePairs(projectLabels, projectData);
+
+            projectChart.data.labels = sanitizedProject.labels;
+            projectChart.data.datasets[0].data = sanitizedProject.data;
+            projectChart.update();
+
+            // Update type chart
+            const typeLabels = Object.keys(typeCounts);
+            const typeData = Object.values(typeCounts);
+            const sanitizedType = sanitizePairs(typeLabels, typeData);
+
+            typeChart.data.labels = sanitizedType.labels;
+            typeChart.data.datasets[0].data = sanitizedType.data;
+            typeChart.update();
+        }
+
+        function applyFilters() {
+            console.log('Applying filters...');
+            const searchTerm = searchInput?.value.toLowerCase() || '';
+            const tipeFilter = filterTipe?.value || '';
+            const projectFilter = filterProject?.value || '';
+            const lokasiFilter = filterLokasi?.value || '';
+
+            console.log('Filter values:', { searchTerm, tipeFilter, projectFilter, lokasiFilter });
+
+            const rows = document.querySelectorAll('#asset-table-body tr');
+            console.log('Total rows to process:', rows.length);
+
+            let visibleCount = 0;
+            const visibleRows = [];
+
+            // Stats counters
+            let totalNilai = 0;
+            let availableCount = 0;
+            let inUseCount = 0;
+
+            rows.forEach((row, index) => {
+                const cells = row.querySelectorAll('td');
+                if (cells.length === 0) return;
+
+                const tipe = cells[0]?.textContent.trim() || '';
+                const pic = cells[2]?.textContent.trim() || '';
+                const project = cells[5]?.textContent.trim() || '';
+                const lokasi = cells[6]?.textContent.trim() || '';
+
+                // Extract harga beli for total nilai calculation
+                const hargaBeliText = cells[8]?.textContent.trim().replace(/[^\d]/g, '') || '0';
+                const hargaBeli = parseInt(hargaBeliText, 10) || 0;
+
+                const matchesSearch = !searchTerm || pic.toLowerCase().includes(searchTerm);
+                const matchesTipe = !tipeFilter || tipe === tipeFilter;
+                const matchesProject = !projectFilter || project === projectFilter;
+                const matchesLokasi = !lokasiFilter || lokasi === lokasiFilter;
+
+                const shouldShow = matchesSearch && matchesTipe && matchesProject && matchesLokasi;
+
+                row.style.display = shouldShow ? '' : 'none';
+                if (shouldShow) {
+                    visibleCount++;
+                    visibleRows.push(row);
+
+                    // Update stats
+                    totalNilai += hargaBeli;
+                    if (pic === 'Available') {
+                        availableCount++;
+                    } else {
+                        inUseCount++;
+                    }
+                }
+
+                // Log every 50th row for debugging
+                if (index % 50 === 0) {
+                    console.log(`Row ${index} - Type: ${tipe}, PIC: ${pic}, Project: ${project}, Lokasi: ${lokasi}, HargaBeli: ${hargaBeli}, Visible: ${shouldShow}`);
+                }
+            });
+
+            console.log('Filtering complete. Visible rows:', visibleCount);
+            console.log('Stats calculated:', { totalNilai, availableCount, inUseCount });
+
+            // Update stats cards
+            updateStatsCards(visibleCount, totalNilai, availableCount, inUseCount);
+
+            // Update hidden form inputs for export
+            document.getElementById('hidden-pic').value = searchTerm;
+            document.getElementById('hidden-tipe').value = tipeFilter;
+            document.getElementById('hidden-project').value = projectFilter;
+            document.getElementById('hidden-lokasi').value = lokasiFilter;
+
+            console.log('Filter values updated in hidden inputs');
+
+            // Update charts based on filtered data
+            console.log('Updating charts with filtered data...');
+            updateChartsWithFilteredData(visibleRows);
+        }
+
+        // Attach listeners
+        searchInput?.addEventListener('input', applyFilters);
+        filterTipe?.addEventListener('change', applyFilters);
+        filterProject?.addEventListener('change', applyFilters);
+        filterLokasi?.addEventListener('change', applyFilters);
+
+        // Reset
+        resetBtn?.addEventListener('click', () => {
+            console.log('Resetting filters...');
+            if (searchInput) searchInput.value = '';
+            if (filterTipe) filterTipe.value = '';
+            if (filterProject) filterProject.value = '';
+            if (filterLokasi) filterLokasi.value = '';
+
+            // Reset hidden inputs for export form
+            document.getElementById('hidden-pic').value = '';
+            document.getElementById('hidden-tipe').value = '';
+            document.getElementById('hidden-project').value = '';
+            document.getElementById('hidden-lokasi').value = '';
+
+            // Show all rows
+            const rows = document.querySelectorAll('#asset-table-body tr');
+            rows.forEach(row => {
+                row.style.display = '';
+            });
+
+            console.log('Restoring original stats and charts...');
+
+            // Restore original stat cards
+            if (originalStats) {
+                console.log('Original stats:', originalStats);
+                updateStatsCards(
+                    originalStats.totalAssets,
+                    originalStats.totalNilaiValue,
+                    originalStats.available,
+                    originalStats.inUse
+                );
+            }
+
+            // Reset charts to original data
+            if (projectChart && typeChart) {
+                console.log('Resetting charts to original data');
+                // Restore project chart
+                projectChart.data.labels = originalProjectChartData.labels;
+                projectChart.data.datasets[0].data = originalProjectChartData.data;
+                projectChart.update();
+
+                // Restore type chart
+                typeChart.data.labels = originalTypeChartData.labels;
+                typeChart.data.datasets[0].data = originalTypeChartData.data;
+                typeChart.update();
+            }
+        });
+    }
+
+    window.deleteAsset = function(id) {
+        if (!confirm('Anda yakin ingin menghapus asset ini? Tindakan ini tidak dapat dibatalkan.')) {
+            return;
+        }
+
+        const url = `/assets/${id}`;
+        const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+        fetch(url, {
+            method: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': token,
+                'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest',
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                showToast(data.message || 'Asset berhasil dihapus.');
+                // Find and remove the row from the table
+                const row = document.querySelector(`button[onclick="deleteAsset(${id})"]`).closest('tr');
+                if (row) {
+                    row.remove();
+                }
+            } else {
+                showToast(data.message || 'Gagal menghapus asset.', false);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            showToast('Terjadi kesalahan saat menghapus asset.', false);
+        });
+    };
+
+    // --- TABLE ACTIONS ---
+    // safe setter helper
+    function setTextIfExists(id, text) {
+        const el = document.getElementById(id);
+        if (el) el.textContent = text;
+    }
+
+    window.viewAsset = function(id) {
+        console.log('View asset:', id);
+        // fetch asset JSON and show detail modal
+        (async function() {
+            try {
+                const res = await fetch(`/assets/${id}/json`, { headers: { 'X-Requested-With': 'XMLHttpRequest' }, credentials: 'same-origin' });
+                if (!res.ok) throw new Error('Gagal mengambil data asset');
+                const payload = await res.json();
+                if (!payload || !payload.asset) throw new Error('Response tidak berisi asset');
+                const a = payload.asset;
+                // remember current asset id for holder add
+                window.__currentAssetId = a.id;
+
+                // populate detail modal fields (safely) - updated for new modal structure
+                setTextIfExists('detail-tipe', a.tipe || '-');
+                setTextIfExists('detail-jenis-aset', a.jenis_aset || '-');
+                setTextIfExists('detail-merk', a.merk || '-');
+                setTextIfExists('detail-serial-number', a.serial_number || '-');
+                setTextIfExists('detail-pic', a.pic || '-');
+                setTextIfExists('detail-project', a.project || '-');
+                setTextIfExists('detail-lokasi', a.lokasi || '-');
+
+                // status dengan badge styling
+                const statusEl = document.getElementById('detail-status');
+                if (statusEl) {
+                    const status = a.pic === 'Available' ? 'Available' : 'In Use';
+                    statusEl.textContent = status;
+                    if (status === 'Available') {
+                        statusEl.className = 'inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800';
+                    } else {
+                        statusEl.className = 'inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-800';
+                    }
+                }
+
+                // show tanggal_beli if available; otherwise fallback to tahun_beli (display as 01 Jan YEAR)
+                let tanggalText = '-';
+                if (a.tanggal_beli) {
+                    try {
+                        tanggalText = (new Date(a.tanggal_beli)).toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' });
+                    } catch (e) { tanggalText = a.tanggal_beli; }
+                } else if (a.tahun_beli) {
+                    // show explicit fallback format "01 Jan <tahun>"
+                    tanggalText = '01 Jan ' + String(a.tahun_beli);
+                }
+                setTextIfExists('detail-tanggal-beli', tanggalText);
+                setTextIfExists('detail-harga-beli', a.harga_beli ? 'Rp ' + Number(a.harga_beli).toLocaleString('id-ID') : '-');
+                setTextIfExists('detail-harga-sewa', a.harga_sewa ? 'Rp ' + Number(a.harga_sewa).toLocaleString('id-ID') : '-');
+
+                // show/hide pajak section for kendaraan; service for kendaraan & splicer
+                const tipeLower = (a.tipe || '').toLowerCase();
+                const isKendaraan = tipeLower === 'kendaraan';
+                const hasService = isKendaraan || tipeLower === 'splicer';
+                const pajakSection = document.getElementById('detail-pajak-section');
+                const servisSection = document.getElementById('detail-servis-section');
+
+                if (isKendaraan) {
+                    // Show pajak section
+                    if (pajakSection) {
+                        pajakSection.style.display = 'block';
+                        setTextIfExists('detail-tanggal-pajak', a.tanggal_pajak ?
+                            (new Date(a.tanggal_pajak)).toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' }) : '-');
+                        setTextIfExists('detail-jumlah-pajak', a.jumlah_pajak ? 'Rp ' + Number(a.jumlah_pajak).toLocaleString('id-ID') : '-');
+
+                        const statusPajakEl = document.getElementById('detail-status-pajak');
+                        if (statusPajakEl && a.status_pajak) {
+                            statusPajakEl.textContent = a.status_pajak;
+                            if (a.status_pajak === 'Lunas') {
+                                statusPajakEl.className = 'inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800';
+                            } else {
+                                statusPajakEl.className = 'inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800';
+                            }
+                        }
+                    }
+
+                }
+
+                // Servis section for Kendaraan & Splicer
+                if (servisSection) {
+                    if (hasService) {
+                        servisSection.style.display = 'block';
+                        const servisBody = document.getElementById('detail-servis-body');
+                        if (servisBody) {
+                            servisBody.innerHTML = '';
+                            if (Array.isArray(a.services) && a.services.length) {
+                                a.services.forEach(s => {
+                                    const row = document.createElement('tr');
+                                    row.innerHTML = `
+                                        <td class="px-4 py-2 text-sm">${s.service_date ? (new Date(s.service_date)).toLocaleDateString('id-ID') : '-'}</td>
+                                        <td class="px-4 py-2 text-sm">${s.description || '-'}</td>
+                                        <td class="px-4 py-2 text-sm">${s.cost ? 'Rp ' + Number(s.cost).toLocaleString('id-ID') : '-'}</td>
+                                        <td class="px-4 py-2 text-sm">${s.vendor || '-'}</td>
+                                    `;
+                                    servisBody.appendChild(row);
+                                });
+                            } else {
+                                servisBody.innerHTML = '<tr><td colspan="4" class="px-4 py-2 text-sm text-gray-500 text-center">Belum ada riwayat servis</td></tr>';
+                            }
+                        }
+                    } else {
+                        servisSection.style.display = 'none';
+                    }
+                }
+
+                // Hide pajak for non-kendaraan
+                if (!isKendaraan && pajakSection) pajakSection.style.display = 'none';
+
+                // show modal
+                document.getElementById('asset-detail-modal').classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            } catch (err) {
+                console.error(err);
+                showToast('Gagal memuat detail asset: ' + err.message, false);
+            }
+        })();
+    };
+
+    // Close detail modal function
+    window.closeDetailModal = function() {
+        document.getElementById('asset-detail-modal').classList.add('hidden');
+        document.body.style.overflow = 'auto';
+    };
+
+    // add holder button
+    document.getElementById('add-holder-btn')?.addEventListener('click', async function(){
+        const nameEl = document.getElementById('new-holder-name');
+        const startEl = document.getElementById('new-holder-start');
+        const name = nameEl?.value?.trim();
+        if (!name) { showToast('Nama pemegang harus diisi', false); return; }
+        const payload = { holder_name: name, start_date: startEl?.value || null };
+        const aid = window.__currentAssetId;
+        if (!aid) { showToast('Asset tidak diketahui', false); return; }
+        try {
+            const resp = await fetch(`/assets/${aid}/holders`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Requested-With': 'XMLHttpRequest', 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '' }, body: JSON.stringify(payload)});
+            const j = await resp.json();
+            if (!resp.ok || !j.success) { showToast(j.message || 'Gagal menambah pemegang', false); return; }
+            // append new holder row
+            const holderList = document.getElementById('detail-holders-list');
+            const h = j.holder;
+            const row = document.createElement('div');
+            row.className = 'flex items-center justify-between bg-gray-50 border rounded-lg p-3 mb-2';
+            row.innerHTML = `<div class="font-semibold">${h.holder_name}</div><div class="text-sm text-gray-500">${h.start_date ? (new Date(h.start_date)).toLocaleDateString('id-ID') : '-'}</div>`;
+            const del = document.createElement('button'); del.className = 'px-3 py-1 bg-red-100 text-red-700 rounded'; del.textContent = 'Hapus';
+            del.addEventListener('click', async function(){ if (!confirm('Hapus riwayat pemegang ini?')) return; const resp2 = await fetch(`/holders/${h.id}`, { method: 'DELETE', headers: { 'X-Requested-With':'XMLHttpRequest','X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''}}); const resj = await resp2.json(); if (resp2.ok && resj.success) { row.remove(); showToast('Entry penghapus berhasil', true); } else { showToast(resj.message || 'Gagal menghapus', false); } });
+            row.appendChild(del);
+            holderList.prepend(row);
+            // clear inputs
+            nameEl.value = '';
+            startEl.value = '';
+            showToast('Riwayat pemegang ditambahkan', true);
+        } catch (err) { console.error(err); showToast('Gagal menambah pemegang: '+err.message, false); }
+    });
+
+    window.editAsset = async function(id) {
+        console.log('Edit asset:', id);
+        try {
+            const res = await fetch(`/assets/${id}/json`, { headers: { 'X-Requested-With': 'XMLHttpRequest' } });
+            if (!res.ok) throw new Error('Gagal mengambil data asset');
+            const payload = await res.json();
+            const asset = payload.asset;
+
+            // populate form inputs by name
+            Object.keys(asset).forEach(key => {
+                const el = document.querySelector(`#asset-modal [name="${key}"]`);
+                if (!el) return;
+                if (el.tagName === 'SELECT' || el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                    el.value = asset[key] === null ? '' : asset[key];
+                }
+            });
+
+            // pajak
+            const form = document.getElementById('asset-form');
+            if (asset.tanggal_pajak) {
+                // Format date as dd/mm/yyyy for display
+                const dateObj = new Date(asset.tanggal_pajak);
+                const day = String(dateObj.getDate()).padStart(2, '0');
+                const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+                const year = dateObj.getFullYear();
+                form.querySelector('[name="tanggal_pajak_display"]').value = `${day}/${month}/${year}`;
+                form.querySelector('[name="tanggal_pajak_display"]').type = 'text';
+                form.querySelector('[name="tanggal_pajak"]').value = asset.tanggal_pajak.substring(0,10);
+            }
+            if (asset.jumlah_pajak) form.querySelector('[name="jumlah_pajak"]').value = asset.jumlah_pajak;
+            if (asset.status_pajak) form.querySelector('[name="status_pajak"]').value = asset.status_pajak;
+
+            // services
+            const svcContainer = document.getElementById('service-rows-modal');
+            if (Array.isArray(asset.services) && svcContainer) {
+                svcContainer.innerHTML = '';
+                asset.services.forEach(s => {
+                    const div = document.createElement('div');
+                    div.className = 'flex gap-3 items-center service-row mb-4';
+                    // prefer file_url (public) returned by server; fallback to file_path
+                    const fileHref = s.file_url || s.file_path || null;
+                    const fileStatus = fileHref ?
+                        '<span class="px-3 py-1.5 bg-white text-blue-600 rounded-r-md border border-l-0 border-gray-300"><a href="' + fileHref + '" target="_blank" rel="noopener noreferrer">Lihat</a></span>' :
+                        '<span class="px-3 py-1.5 bg-white text-gray-500 rounded-r-md border border-l-0 border-gray-300">No file</span>';
+
+                    div.innerHTML =
+                        '<input type="hidden" name="service_id[]" value="' + s.id + '">' +
+                        '<input type="hidden" name="existing_service_file[]" value="' + (s.file_path || '') + '">' +
+                        '<div style="width: 180px; flex: 0 0 180px;">' +
+                            '<input type="' + (s.service_date ? 'date' : 'text') + '" name="service_date[]" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none" value="' + (s.service_date ? s.service_date.substring(0,10) : '') + '" placeholder="dd/mm/yyyy" onfocus="(this.type=\'date\')" onblur="if(!this.value) this.type=\'text\'">' +
+                        '</div>' +
+                        '<div class="flex-1">' +
+                            '<input type="text" name="service_desc[]" placeholder="Keterangan" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none" value="' + (s.description||'').replace(/"/g,'&quot;') + '">' +
+                        '</div>' +
+                        '<div style="width: 140px; flex: 0 0 140px;">' +
+                            '<input type="number" name="service_cost[]" placeholder="Biaya" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none" value="' + (s.cost||'') + '">' +
+                        '</div>' +
+                        '<div style="width: 160px; flex: 0 0 160px;">' +
+                            '<input type="text" name="service_vendor[]" placeholder="Bengkel" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none" value="' + (s.vendor||'').replace(/"/g,'&quot;') + '">' +
+                        '</div>' +
+                        '<div class="flex items-center gap-2">' +
+                            '<div class="flex">' +
+                                '<label class="px-3 py-1.5 bg-gray-100 text-gray-700 rounded-l-md border border-gray-300 cursor-pointer">' +
+                                    'Upload' +
+                                    '<input type="file" name="service_file[]" class="hidden">' +
+                                '</label>' +
+                                fileStatus +
+                            '</div>' +
+                        '</div>';
+
+                    svcContainer.appendChild(div);
+                });
+            }
+
+            form.action = `/assets/${asset.id}`;
+
+            let methodInput = form.querySelector('input[name="_method"]');
+            if (!methodInput) {
+                methodInput = document.createElement('input');
+                methodInput.type = 'hidden';
+                methodInput.name = '_method';
+                form.appendChild(methodInput);
+            }
+            methodInput.value = 'PUT';
+
+            // show modal
+            document.getElementById('asset-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            // ensure modal pajak/servis sections match the asset type when editing
+            updateModalVehicleSections2();
+        } catch (err) {
+            console.error(err);
+            showToast('Gagal memuat data untuk edit: ' + err.message, false);
+        }
+    };
+
+    // This function was already defined above but was overridden
+    // Restoring proper implementation of deleteAsset function
+    /*window.deleteAsset = function(id) {
+        if (confirm('Apakah Anda yakin ingin menghapus asset ini?')) {
+            console.log('Delete asset:', id);
+            showToast('Fitur hapus akan segera tersedia', false);
+        }
+    };*/
+
+    // Initialize when DOM is ready
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('DOM loaded, initializing charts and filters...');
+        createCharts();
+        initFilters();
+    });
+
+    // --- DYNAMIC SELECT ADD NEW OPTION ---
+    const addOptionModal = document.createElement('div');
+    addOptionModal.id = 'add-option-modal';
+    addOptionModal.className = 'fixed inset-0 bg-black bg-opacity-50 hidden z-50';
+    addOptionModal.innerHTML = `
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-xl w-96 p-8 shadow-xl">
+                <h3 class="text-xl font-semibold mb-4">Tambah Baru</h3>
+                <input id="new-option-input" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 mb-6" placeholder="Nama...">
+                <div class="flex justify-end gap-3">
+                    <button id="cancel-add-option" class="px-5 py-2.5 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition-colors font-medium">Batal</button>
+                    <button id="save-add-option" class="px-5 py-2.5 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium">Simpan</button>
+                </div>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(addOptionModal);
+
+    let currentSelectForAdd = null;
+
+    function openAddOption(select) {
+        currentSelectForAdd = select;
+        addOptionModal.classList.remove('hidden');
+        document.getElementById('new-option-input').focus();
+    }
+
+    function closeAddOption() {
+        currentSelectForAdd = null;
+        addOptionModal.classList.add('hidden');
+        document.getElementById('new-option-input').value = '';
+    }
+
+    document.getElementById('cancel-add-option').addEventListener('click', closeAddOption);
+    document.getElementById('save-add-option').addEventListener('click', async function() {
+        const val = document.getElementById('new-option-input').value.trim();
+        if (!val) return;
+        const name = currentSelectForAdd.name;
+        try {
+            const resp = await fetch('/options/' + encodeURIComponent(name), {
+                method: 'POST',
+                headers: {'Content-Type':'application/json','X-Requested-With':'XMLHttpRequest'},
+                body: JSON.stringify({name: val})
+            });
+            if (!resp.ok) throw new Error('Failed to save');
+            const json = await resp.json();
+            const opt = document.createElement('option'); opt.value = json.name; opt.textContent = json.name; currentSelectForAdd.appendChild(opt); currentSelectForAdd.value = json.name;
+        } catch (err) {
+            console.error('Save option failed', err);
+            // fallback to localStorage
+            const key = 'options_' + name;
+            const existing = JSON.parse(localStorage.getItem(key) || '[]'); existing.push(val); localStorage.setItem(key, JSON.stringify(existing));
+            const opt = document.createElement('option'); opt.value = val; opt.textContent = val; currentSelectForAdd.appendChild(opt); currentSelectForAdd.value = val;
+        }
+        closeAddOption();
+    });
+
+    // attach listener to selects with __add__ option
+    const addSelects = document.querySelectorAll('select');
+    // load options from server for each select
+    addSelects.forEach(async s => {
+        const name = s.name;
+        try {
+            const resp = await fetch('/options/' + encodeURIComponent(name));
+            if (resp.ok) {
+                const arr = await resp.json();
+                arr.forEach(v => { const o = document.createElement('option'); o.value = v; o.textContent = v; s.appendChild(o); });
+            }
+        } catch (e) {
+            // ignore
+        }
+
+        s.addEventListener('change', function(e) {
+            if (this.value === '__add__') {
+                this.value = '';
+                openAddOption(this);
+            }
+        });
+    });
+
+    console.log('Dashboard initialized successfully!');
+});
+</script>
+@endpush

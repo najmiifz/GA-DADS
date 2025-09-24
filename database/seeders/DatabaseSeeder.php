@@ -9,18 +9,11 @@ use Illuminate\Support\Facades\Hash;
 class DatabaseSeeder extends Seeder
 {
     public function run(): void {
-        DB::table('users')->insert([
-            'name' => 'Admin',
-            'email' => 'admin@example.com',
-            'password' => Hash::make('password'),
-            'role' => 'admin',
-        ]);
-
-        DB::table('users')->insert([
-            'name' => 'User',
-            'email' => 'user@example.com',
-            'password' => Hash::make('password'),
-            'role' => 'user',
-        ]);
+        // Seed roles, permissions, and demo users
+        $this->call(RolePermissionSeeder::class);
+    // Seed assets
+    $this->call(AssetSeeder::class);
+    // Seed holder histories based on existing assets
+    $this->call(HolderHistorySeeder::class);
     }
 }

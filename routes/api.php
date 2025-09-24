@@ -9,3 +9,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/assets/{asset}', [AssetController::class, 'showJson'])->name('assets.show.json');
+
+//coment commit
